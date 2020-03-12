@@ -1,0 +1,7 @@
+<div>
+    <a>INSERT INTO {{table.tableName}} (</a>
+    <fill-fields [iterateArray]="table.tableFields"></fill-fields>
+    <a>) VALUES (</a>
+    <fill-fields [iterateArray]="values"></fill-fields>
+    <a>)</a>
+</div>
