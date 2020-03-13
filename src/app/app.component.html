@@ -1,10 +1,9 @@
 <mat-toolbar>SQL Gen</mat-toolbar>
 <mat-form-field>
   <mat-label>Values</mat-label>
-  <input matInput spellcheck="false" 
-  (keyup)="processValues($event)">
+  <input matInput spellcheck="false" (keyup)="sendValues($event)">
 </mat-form-field>
-
-<insert [columns]="tableColumns"></insert>
-
+<div>
+  <insert [table]="tableObservable"></insert>
+</div>
 <button mat-button (click)="logFields()">log fields</button>

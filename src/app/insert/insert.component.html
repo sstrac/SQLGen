@@ -1,4 +1,4 @@
-<a>INSERT INTO dummy (
+<a>INSERT INTO {{tableName}} (
     <a *ngFor="let columnName of columnKeys">
         <a *ngIf="columnName!=columnKeys[0]">,</a>
         '{{columnName}}'
@@ -10,3 +10,4 @@
     </a>
     )
 </a>
+<button matButton (click)="logInputKeyValue()">log input/key/values</button>
