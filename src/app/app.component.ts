@@ -1,5 +1,6 @@
 import { Component, Output, Input } from '@angular/core';
-import { jobTable } from './job_table_mapping'
+import { TABLES } from './job_table_mapping'
+import { JobVacancy } from './shared/table';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,16 @@ import { jobTable } from './job_table_mapping'
 export class AppComponent {
 //need a mapping
 
-  jobValues: string[] = []
-  jobTable = jobTable
+  tableColumns: JobVacancy = {
+    id: '12345',
+    category: 'something'
+  }
 
-  processInput(event){
-    this.jobValues = event.target.value.split(",")
+  processValues(event){
+    //this.insertValues = event.target.value.split(",")
   }
 
   logFields() {
-    console.log(this.jobValues)
+    console.log(this.tableColumns)
   }
 }

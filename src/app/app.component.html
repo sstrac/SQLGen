@@ -2,9 +2,9 @@
 <mat-form-field>
   <mat-label>Values</mat-label>
   <input matInput spellcheck="false" 
-  (keydown)="processInput($event)">
+  (keyup)="processValues($event)">
 </mat-form-field>
-<insert [table]="jobTable"
-  [values]="jobValues">
-</insert>
+
+<insert [columns]="tableColumns"></insert>
+
 <button mat-button (click)="logFields()">log fields</button>
