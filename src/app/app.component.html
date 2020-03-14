@@ -1,9 +1,20 @@
 <mat-toolbar>SQL Gen</mat-toolbar>
 <mat-form-field>
-  <mat-label>Values</mat-label>
-  <input matInput spellcheck="false" (keyup)="sendValues($event)">
+  <mat-label>job_vacancy</mat-label>
+  <input matInput spellcheck="false"
+  (keyup)="sendValues($event, 'job_vacancy')"
+  (keydown)="sendValues($event, 'job_vacancy')">
+</mat-form-field>
+<mat-form-field *ngIf="centralTable.table_fields.id">
+  <mat-label>job</mat-label>
+  <input matInput spellcheck="false"
+  (keyup)="sendValues($event, 'job')"
+  (keydown)="sendValues($event, 'job')">
 </mat-form-field>
 <div>
-  <insert [table]="tableObservable"></insert>
+  <insert [table]="centralTableObs"></insert>
+</div>
+<div *ngIf="centralTable.table_fields.id">
+  <insert [table]="secondTableObs"></insert>
 </div>
 <button mat-button (click)="logFields()">log fields</button>
