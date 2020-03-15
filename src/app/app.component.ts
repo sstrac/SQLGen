@@ -14,8 +14,8 @@ export class AppComponent {
 
   constructor() {
     this.tables.push(
-      { name: 'job_vacancy', fields: { job_id: ''} },
-      { name: 'job', fields: { id: '' } }
+      { name: 'job_vacancy', fields: {} },
+      { name: 'job', fields: {} }
     )
     this.tableKeys.push(
       JOB_VACANCY_KEYS, JOB_KEYS
@@ -40,7 +40,6 @@ export class AppComponent {
       if( i < cols.length)
         table.fields[cols[i]] = valueArr[i]
     }
-    console.log(valueArr)
     this.overrideChildValues() //handle update to child linked tables
     //should send updates to all table entities
     this.cleanupEmptyValues() //cleansup all tables
