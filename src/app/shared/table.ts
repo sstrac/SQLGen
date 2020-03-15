@@ -1,8 +1,10 @@
-export interface Table{
-    table_name: string
-    table_fields: any
+export interface Entity{
+    name: string
+    fields: any
 }
-export const JOB_KEYS = [
+export const JOB_KEYS: Entity = {
+    name: 'job',
+    fields: [
     'id',
     'description',
     'distance',
@@ -16,8 +18,11 @@ export const JOB_KEYS = [
     'status',
     'type',
     'owner_id'
-]
-export const JOB_VACANCY_KEYS = [
+    ]
+}
+export const JOB_VACANCY_KEYS: Entity = {
+    name: 'job_vacancy',
+    fields: [
     'id',
     'category',
     'closing_method',
@@ -27,21 +32,16 @@ export const JOB_VACANCY_KEYS = [
     'status',
     'version',
     'job_id'
-]
+    ]
+}
 export const PROFILE_KEYS = [
     'name'
 ]
 export const TABLE_MAPPING = [
     {
-        parentEntity: 'job',
+        parentEntityName: 'job',
         parentKey: 'id',
-        childEntity: 'job_vacancy',
+        childEntityName: 'job_vacancy',
         childKey: 'job_id'
-    },
-    {
-        parentEntity: 'job_vacancy',
-        parentKey: 'job_id',
-        childEntity: 'job',
-        childKey: 'id'
     }
 ]

@@ -1,5 +1,5 @@
 import { Component, Output, Input } from '@angular/core';
-import { Table, JOB_VACANCY_KEYS, JOB_KEYS, PROFILE_KEYS, TABLE_MAPPING } from './shared/table';
+import { Entity, JOB_VACANCY_KEYS, JOB_KEYS, PROFILE_KEYS, TABLE_MAPPING } from './shared/table';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -8,14 +8,18 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  tables: Table[] = []
-  observable: Observable<Table>
+  tables: Entity[] = []
+  tableKeys: Entity[] = []
+  observable: Observable<Entity>
   obs1 = of(this.tables[1])
 
   constructor() {
     this.tables.push(
-      { table_name: 'job_vacancy', table_fields: {} },
-      { table_name: 'job', table_fields: {} }
+      { name: 'job_vacancy', fields: {} },
+      { name: 'job', fields: {} }
+    )
+    this.tableKeys.push(
+      JOB_VACANCY_KEYS, JOB_KEYS
     )
   }
 
@@ -24,42 +28,51 @@ export class AppComponent {
 
   }
   sendValues(event, tablename){
-    var cols = JOB_VACANCY_KEYS
-    let table = this.getTableByName(tablename)
+    var cols = this.getEntityByName(tablename, this.tableKeys).fields
+    let table = this.getEntityByName(tablename, this.tables)
     let valueArr = event.target.value.split(",")
-    for (let i = 0; i != valueArr.length; i++) {
-      table.table_fields[cols[i]] = valueArr[i]
+    for (let i = 0; i < valueArr.length; i++) {
+      table.fields[cols[i]] = valueArr[i]
     }
-    for(const field in table.table_fields) {
-      if(table.table_fields[field] === ''){
-        delete table.table_fields[field]
-      }
-    }
+    this.cleanupEmptyValues(table)
     this.overrideChildValues()
     console.log(this.tables)
     this.observable = of(table)
   }
 
+  cleanupEmptyValues(table){
+    for(const field in table.fields) {
+      if(table.fields[field] === ''){
+        delete table.fields[field]
+      }
+    }
+  }
+
   overrideChildValues(){
     TABLE_MAPPING.forEach(mapping => {
-      let parentTable = this.getTableByName(mapping.parentEntity)
-      let childTable = this.getTableByName(mapping.childEntity)
-      if(parentTable.table_name == mapping.parentEntity
-        && childTable.table_name == mapping.childEntity){
-          parentTable.table_fields[mapping.parentKey] = childTable.table_fields[mapping.childKey]
+      let parentTable = this.getEntityByName(mapping.parentEntityName, this.tables)
+      let childTable = this.getEntityByName(mapping.childEntityName, this.tables)
+      if(parentTable.name == mapping.parentEntityName
+        && childTable.name == mapping.childEntityName
+        && this.isDefined(childTable.fields[mapping.childKey])){
+          parentTable.fields[mapping.parentKey] = childTable.fields[mapping.childKey]
         }
     });
   }
 
-  getTableByName(tablename: string): Table {
+  isDefined(item){
+    return item !== undefined
+  }
+
+  getEntityByName(itemName: string, entities: Entity[]): Entity {
     let result
-    this.tables.forEach(table => {
-      if(table.table_name == tablename){
-        result = table
+    entities.forEach(item => {
+      if(item.name == itemName){
+        result = item
       }
     });
     if(result == undefined)
-      throw Error('table not found in tables array')
+      throw Error('item not found in entity array')
     return result;
   }
 }
