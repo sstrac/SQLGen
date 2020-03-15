@@ -1,8 +1,8 @@
 export interface Table{
     table_name: string
-    table_fields: string[]
+    table_fields: any
 }
-export const JOB_VACANCY_KEYS = [
+export const JOB_KEYS = [
     'id',
     'description',
     'distance',
@@ -17,7 +17,7 @@ export const JOB_VACANCY_KEYS = [
     'type',
     'owner_id'
 ]
-export const JOB_KEYS = [
+export const JOB_VACANCY_KEYS = [
     'id',
     'category',
     'closing_method',
@@ -30,4 +30,18 @@ export const JOB_KEYS = [
 ]
 export const PROFILE_KEYS = [
     'name'
+]
+export const TABLE_MAPPING = [
+    {
+        parentEntity: 'job',
+        parentKey: 'id',
+        childEntity: 'job_vacancy',
+        childKey: 'job_id'
+    },
+    {
+        parentEntity: 'job_vacancy',
+        parentKey: 'job_id',
+        childEntity: 'job',
+        childKey: 'id'
+    }
 ]

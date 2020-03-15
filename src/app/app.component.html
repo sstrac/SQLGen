@@ -5,16 +5,9 @@
   (keyup)="sendValues($event, 'job_vacancy')"
   (keydown)="sendValues($event, 'job_vacancy')">
 </mat-form-field>
-<mat-form-field *ngIf="centralTable.table_fields.id">
-  <mat-label>job</mat-label>
-  <input matInput spellcheck="false"
-  (keyup)="sendValues($event, 'job')"
-  (keydown)="sendValues($event, 'job')">
-</mat-form-field>
 <div>
-  <insert [table]="centralTableObs"></insert>
+  <insert [table]="observable"></insert>
 </div>
-<div *ngIf="centralTable.table_fields.id">
-  <insert [table]="secondTableObs"></insert>
+<div>
+  <insert [table]="obs1"></insert>
 </div>
-<button mat-button (click)="logFields()">log fields</button>

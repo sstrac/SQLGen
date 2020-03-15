@@ -1,5 +1,5 @@
 import { Component, Output, Input } from '@angular/core';
-import { Table, JOB_VACANCY_KEYS, JOB_KEYS, PROFILE_KEYS } from './shared/table';
+import { Table, JOB_VACANCY_KEYS, JOB_KEYS, PROFILE_KEYS, TABLE_MAPPING } from './shared/table';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -8,53 +8,58 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  centralTable: Table
-  centralTableObs
-  secondTableObs
+  tables: Table[] = []
+  observable: Observable<Table>
+  obs1 = of(this.tables[1])
 
-  ngOnInit() {
-    this.centralTable = { table_name: '', table_fields: [] }
+  constructor() {
+    this.tables.push(
+      { table_name: 'job_vacancy', table_fields: {} },
+      { table_name: 'job', table_fields: {} }
+    )
   }
 
-  sendValues(event, tablename, sharedValues?) {
-    switch (tablename) {
-      case 'job_vacancy': {
-        this.sendValuesToCentralTable(event, tablename, JOB_VACANCY_KEYS)
-        this.centralTableObs = of(this.centralTable)
-        break;
-      }
-      case 'job': {
-        let table = this.sendValuesToTable(event, tablename, JOB_KEYS)
-        console.log(sharedValues)
-        this.secondTableObs = of(table)
-        break;
-      }
-    }
-  }
+  ngOnInit(){
 
-  sendValuesToTable(event, tablename, cols): Table {
-    let table: Table = { table_name: tablename, table_fields: [] }
+
+  }
+  sendValues(event, tablename){
+    var cols = JOB_VACANCY_KEYS
+    let table = this.getTableByName(tablename)
     let valueArr = event.target.value.split(",")
     for (let i = 0; i != valueArr.length; i++) {
       table.table_fields[cols[i]] = valueArr[i]
     }
-    return table
-  }
-
-  sendValuesToCentralTable(event, tablename, cols) {
-    this.centralTable.table_name = tablename
-    let valueArr = event.target.value.split(",")
-    for (let i = 0; i != valueArr.length; i++) {
-      this.centralTable.table_fields[cols[i]] = valueArr[i]
+    for(const field in table.table_fields) {
+      if(table.table_fields[field] === ''){
+        delete table.table_fields[field]
+      }
     }
+    this.overrideChildValues()
+    console.log(this.tables)
+    this.observable = of(table)
   }
 
-  logFields() {
-    this.centralTableObs.subscribe(
-      element => console.log(element)
-    )
-    this.secondTableObs.subscribe(
-      element => console.log(element)
-    )
+  overrideChildValues(){
+    TABLE_MAPPING.forEach(mapping => {
+      let parentTable = this.getTableByName(mapping.parentEntity)
+      let childTable = this.getTableByName(mapping.childEntity)
+      if(parentTable.table_name == mapping.parentEntity
+        && childTable.table_name == mapping.childEntity){
+          parentTable.table_fields[mapping.parentKey] = childTable.table_fields[mapping.childKey]
+        }
+    });
+  }
+
+  getTableByName(tablename: string): Table {
+    let result
+    this.tables.forEach(table => {
+      if(table.table_name == tablename){
+        result = table
+      }
+    });
+    if(result == undefined)
+      throw Error('table not found in tables array')
+    return result;
   }
 }

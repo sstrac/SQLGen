@@ -1,13 +1,14 @@
 
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Table } from '../shared/table';
 
 @Component({
   selector: 'insert',
   templateUrl: './insert.component.html'
 })
 export class InsertComponent {
-  @Input() table: Observable<any>
+  @Input() table: Observable<Table>
   columnKeys: string[] 
   columnValues: string[]
   tableName: string
