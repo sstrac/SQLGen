@@ -68,14 +68,10 @@ export class AppComponent {
       let childTable = this.getEntityByName(mapping.childEntityName, this.tables)
       if(parentTable.name == mapping.parentEntityName
         && childTable.name == mapping.childEntityName
-        && this.isDefined(childTable.fields[mapping.childKey])){
+        && isDefined(childTable.fields[mapping.childKey])){
           parentTable.fields[mapping.parentKey] = childTable.fields[mapping.childKey]
         }
     });
-  }
-
-  isDefined(item){
-    return item !== undefined
   }
 
   getEntityByName(itemName: string, entities: Entity[]): Entity {
@@ -89,4 +85,8 @@ export class AppComponent {
       throw Error('item not found in entity array')
     return result;
   }
+
+}
+export function isDefined(item){
+  return item !== undefined
 }

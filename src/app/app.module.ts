@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule } from '@angular/material'
 import { InsertComponent } from './insert/insert.component';
+import { IsEmptyPipe } from './shared/isempty.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InsertComponent
+    InsertComponent,
+    IsEmptyPipe
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,20 @@
 <mat-toolbar>SQL Gen</mat-toolbar>
-<mat-form-field>
-  <mat-label>job_vacancy</mat-label>
-  <input matInput spellcheck="false"
-  (keydown)="sendValues($event, 'job_vacancy')"
-  (keyup)="sendValues($event, 'job_vacancy')">
-</mat-form-field>
 <div>
-  <insert [table]="getEntityByName('job_vacancy', observables).fields"></insert>
+  <mat-form-field>
+    <mat-label>job_vacancy</mat-label>
+    <input matInput spellcheck="false" (keydown)="sendValues($event, 'job_vacancy')"
+      (keyup)="sendValues($event, 'job_vacancy')">
+  </mat-form-field>
+  <div>
+    <insert [table]="getEntityByName('job_vacancy', observables).fields"></insert>
+  </div>
 </div>
-<div>
-  <insert [table]="getEntityByName('job', observables).fields"></insert>
+<div *ngIf="getEntityByName('job', tables).fields | isempty">
+  <mat-form-field>
+    <mat-label>job</mat-label>
+    <input matInput spellcheck="false" (keydown)="sendValues($event, 'job')" (keyup)="sendValues($event, 'job')">
+  </mat-form-field>
+  <div>
+    <insert [table]="getEntityByName('job', observables).fields"></insert>
+  </div>
 </div>
