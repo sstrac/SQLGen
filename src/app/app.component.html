@@ -8,7 +8,11 @@
     <group>
       <div class="flex">
         <p><strong>Easy Input</strong></p>
-        <button mat-icon-button><mat-icon>add</mat-icon></button>
+        <div>
+          <button mat-icon-button (click)="generateRandomValues()"><mat-icon>autorenew</mat-icon></button>
+          <button mat-icon-button (click)="clearAllValues()"><mat-icon>clear</mat-icon></button>
+          <button mat-icon-button><mat-icon>add</mat-icon></button>
+        </div>
       </div>
       <div>
         <mat-form-field *ngFor="let table of tables">
