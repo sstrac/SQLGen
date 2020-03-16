@@ -7,11 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule } from '@angular/material'
 import { InsertComponent } from './insert/insert.component';
 import { IsEmptyPipe } from './shared/isempty.pipe';
+import { GroupComponent } from './shared/group.component';
+import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InsertComponent,
+    GroupComponent,
+    SidenavContentComponent,
     IsEmptyPipe
   ],
   imports: [

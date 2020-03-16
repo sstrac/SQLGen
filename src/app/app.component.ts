@@ -1,4 +1,4 @@
-import { Component, Output, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Entity, JOB_VACANCY_KEYS, JOB_KEYS, PROFILE_KEYS, TABLE_MAPPING } from './shared/table';
 import { Observable, of, observable } from 'rxjs';
 
@@ -13,12 +13,13 @@ export class AppComponent {
   observables: Entity[] = []
 
   constructor() {
+    this.tableKeys.push(
+      JOB_VACANCY_KEYS, JOB_KEYS, PROFILE_KEYS
+    )
     this.tables.push(
       { name: 'job_vacancy', fields: {} },
-      { name: 'job', fields: {} }
-    )
-    this.tableKeys.push(
-      JOB_VACANCY_KEYS, JOB_KEYS
+      { name: 'job', fields: {} },
+      { name: 'profile', fields: {}}
     )
     this.tables.forEach( table => {
       this.observables.push(

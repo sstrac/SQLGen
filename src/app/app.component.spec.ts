@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'PlayTodaySQLGen'`, () => {
+  it(`should have as title 'SQLGen'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('PlayTodaySQLGen');
+    expect(app.title).toEqual('SQLGen');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('PlayTodaySQLGen app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('SQLGen app is running!');
   });
 });

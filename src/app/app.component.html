@@ -1,20 +1,26 @@
-<mat-toolbar>SQL Gen</mat-toolbar>
-<div>
-  <mat-form-field>
-    <mat-label>job_vacancy</mat-label>
-    <input matInput spellcheck="false" (keydown)="sendValues($event, 'job_vacancy')"
-      (keyup)="sendValues($event, 'job_vacancy')">
-  </mat-form-field>
-  <div>
-    <insert [table]="getEntityByName('job_vacancy', observables).fields"></insert>
-  </div>
-</div>
-<div *ngIf="getEntityByName('job', tables).fields | isempty">
-  <mat-form-field>
-    <mat-label>job</mat-label>
-    <input matInput spellcheck="false" (keydown)="sendValues($event, 'job')" (keyup)="sendValues($event, 'job')">
-  </mat-form-field>
-  <div>
-    <insert [table]="getEntityByName('job', observables).fields"></insert>
-  </div>
-</div>
+<mat-toolbar color="accent">SQL Gen
+</mat-toolbar>
+<mat-drawer-container style="height: 100%">
+  <mat-drawer position="end" mode="side" opened="true">
+    <sidenav-content [tableKeys]=tableKeys></sidenav-content>
+  </mat-drawer>
+  <mat-drawer-content>
+    <group>
+      <div>
+        <p><strong>Easy Input</strong></p>
+      </div>
+      <div>
+        <mat-form-field *ngFor="let table of tables">
+          <mat-label>{{table.name}}</mat-label>
+          <input matInput spellcheck="false" (keydown)="sendValues($event, table.name)"
+            (keyup)="sendValues($event, table.name)">
+        </mat-form-field>
+        <div *ngFor="let table of tables">
+          <insert 
+          *ngIf="getEntityByName(table.name, tables ).fields | isempty"
+          [table]="getEntityByName(table.name, observables).fields"></insert>
+        </div>
+      </div>
+    </group>
+  </mat-drawer-content>
+</mat-drawer-container>

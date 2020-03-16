@@ -1,0 +1,4 @@
+<group *ngFor="let table of tableKeys" style="font-size: small;">
+    <p><strong>{{table.name}}</strong></p>
+    <li *ngFor="let field of table.fields">{{field}}</li>
+</group>
