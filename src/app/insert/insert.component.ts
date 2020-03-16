@@ -8,7 +8,7 @@ import { Entity } from '../shared/table';
   templateUrl: './insert.component.html'
 })
 export class InsertComponent {
-  @Input() table: Observable<Entity>
+  @Input() table: Observable<any>
   columnKeys: string[] 
   columnValues: string[]
   tableName: string

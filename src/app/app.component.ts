@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { Entity, JOB_VACANCY_KEYS, JOB_KEYS, PROFILE_KEYS, TABLE_MAPPING } from './shared/table';
-import { Observable, of, observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { Entity, TABLE_MAPPING } from './shared/table';
+import * as JOB_VACANCY_KEYS from '../assets/job_vacancy.json'
+import * as JOB_KEYS from '../assets/job.json'
+import * as PROFILE_KEYS from '../assets/profile.json'
 
 @Component({
   selector: 'app-root',
@@ -9,12 +12,12 @@ import { Observable, of, observable } from 'rxjs';
 })
 export class AppComponent {
   tables: Entity[] = []
-  tableKeys: Entity[] = []
+  tableKeys = []
   observables: Entity[] = []
 
   constructor() {
     this.tableKeys.push(
-      JOB_VACANCY_KEYS, JOB_KEYS, PROFILE_KEYS
+      JOB_VACANCY_KEYS.default, JOB_KEYS.default, PROFILE_KEYS.default
     )
     this.tables.push(
       { name: 'job_vacancy', fields: {} },
@@ -29,7 +32,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-
+    console.log(this.tableKeys)
   }
 
   generateRandomValues() {
