@@ -4,6 +4,7 @@ import { Entity, TABLE_MAPPING } from './shared/table';
 import * as JOB_VACANCY_KEYS from '../assets/job_vacancy.json'
 import * as JOB_KEYS from '../assets/job.json'
 import * as PROFILE_KEYS from '../assets/profile.json'
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ export class AppComponent {
   tables: Entity[] = []
   tableKeys = []
   observables: Entity[] = []
+  myControl = new FormControl();
+  statusOptions = ['1', '2', '3']
 
   constructor() {
     this.tableKeys.push(
@@ -32,7 +35,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    console.log(this.tableKeys)
+    
   }
 
   generateRandomValues() {

@@ -1,0 +1,5 @@
+<mat-form-field *ngFor="let table of tables">
+    <mat-label>{{table.name}}</mat-label>
+    <input matInput spellcheck="false" (keydown)="sendValues($event, table.name)"
+        (keyup)="sendValues($event, table.name)">
+</mat-form-field>
