@@ -1,4 +1,4 @@
-<a>INSERT INTO {{tableName}} (
+<a (tableUpdate)="updateSQL($event)">INSERT INTO {{tableName}} (
     <a *ngFor="let columnName of columnKeys">
         <a *ngIf="columnName!=columnKeys[0]">,</a>
         '{{columnName}}'

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Entity } from '../shared/table';
+import { Entity } from '../shared/entity.interface';
 
 @Component({
     selector: 'sidenav-content',

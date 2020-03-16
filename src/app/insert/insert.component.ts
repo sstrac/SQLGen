@@ -1,23 +1,23 @@
 
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Entity } from '../shared/table';
+import { EventEmitter } from '@angular/core';
+import { Table } from '../shared/table.interface';
 
 @Component({
   selector: 'insert',
   templateUrl: './insert.component.html'
 })
 export class InsertComponent {
-  @Input() table: Observable<any>
   columnKeys: string[] 
   columnValues: string[]
   tableName: string
 
-  ngOnChanges(){
-    this.table.subscribe( element => {
-      this.tableName = element.name
-      this.columnKeys = Object.keys(element.fields)
-      this.columnValues = Object.values(element.fields)
-    })
+  updateSQL(table){
+    console.log(table)
+      // this.tableName = table.name
+      // this.columnKeys = Object.keys(table.fields)
+      // this.columnValues = Object.values(table.fields)
+
   }
 }

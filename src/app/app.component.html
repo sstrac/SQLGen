@@ -1,42 +1,39 @@
 <mat-toolbar color="accent">SQL Gen
 </mat-toolbar>
-<mat-drawer-container style="height: 100%">
+<!-- <mat-drawer-container style="height: 100%">
   <mat-drawer position="end" mode="side" opened="true">
     <sidenav-content [tableKeys]=tableKeys></sidenav-content>
   </mat-drawer>
-  <mat-drawer-content>
-    <group>
-      <div class="flex">
-        <p><strong>Easy Input</strong></p>
-        <div>
-          <button mat-icon-button (click)="generateRandomValues()">
-            <mat-icon>autorenew</mat-icon>
-          </button>
-          <button mat-icon-button (click)="clearAllValues()">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </div>
-      </div>
+  <mat-drawer-content> -->
+<group>
+  <div class="flex">
+    <p><strong>Easy Input</strong></p>
+    <div>
+      <!-- <button mat-icon-button (click)="generateRandomValues()">
+        <mat-icon>autorenew</mat-icon>
+      </button> -->
+      <button mat-icon-button (click)="clearAllValues">
+        <mat-icon>clear_all</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div *ngFor="let table of tables">
+      <mat-card>
+        <p>{{table.name}}</p>
+        <mat-form-field *ngFor="let fieldKey of table.fieldKeys">
+          <input matInput placeholder="{{fieldKey}}"
+          (keyup)="sendValue($event, table.name, fieldKey)">
+        </mat-form-field>
+      </mat-card>
       <div>
-        <div *ngFor="let tableKey of tableKeys">
-          <mat-card>
-            <p>{{tableKey.name}}
-              <span><button mat-icon-button>
-                <mat-icon>add</mat-icon>
-              </button></span>
-            </p>
-            <mat-form-field *ngFor="let field of tableKey.fields">
-              <input matInput placeholder="{{field}}">
-            </mat-form-field>
-          </mat-card>
-          <div>
-            <button mat-button disabled></button>
-          </div>
-        </div>
-        <!-- <button mat-icon-button>
+        <button mat-button disabled></button>
+      </div>
+    </div>
+    <!-- <button mat-icon-button>
           <mat-icon disabled></mat-icon>
         </button> -->
-        <!-- <mat-form-field *ngFor="let table of tables">
+    <!-- <mat-form-field *ngFor="let table of tables">
           <mat-label>{{table.name}}</mat-label>
           <input matInput spellcheck="false" (keydown)="sendValues($event, table.name)"
             (keyup)="sendValues($event, table.name)"
@@ -47,11 +44,11 @@
             [value]="option">{{option}}</mat-option>
           </mat-autocomplete>
         </mat-form-field> -->
-        <div *ngFor="let table of tables">
-          <insert *ngIf="getEntityByName(table.name, tables ).fields | isempty"
-            [table]="getEntityByName(table.name, observables).fields"></insert>
-        </div>
-      </div>
-    </group>
-  </mat-drawer-content>
-</mat-drawer-container>
+    <div *ngFor="let table of tables">
+      <insert>
+      </insert>
+    </div>
+  </div>
+</group>
+<!-- </mat-drawer-content>
+</mat-drawer-container> -->
