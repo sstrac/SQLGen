@@ -4,6 +4,7 @@ import { Entity, TABLE_MAPPING } from './shared/table';
 import * as JOB_VACANCY_KEYS from '../assets/job_vacancy.json'
 import * as JOB_KEYS from '../assets/job.json'
 import * as PROFILE_KEYS from '../assets/profile.json'
+import * as dedication from '../assets/options/dedication.json'
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -16,7 +17,6 @@ export class AppComponent {
   tableKeys = []
   observables: Entity[] = []
   myControl = new FormControl();
-  statusOptions = ['1', '2', '3']
 
   constructor() {
     this.tableKeys.push(
@@ -35,6 +35,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    console.log(dedication)
     
   }
 

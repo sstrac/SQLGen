@@ -9,27 +9,43 @@
       <div class="flex">
         <p><strong>Easy Input</strong></p>
         <div>
-          <button mat-icon-button (click)="generateRandomValues()"><mat-icon>autorenew</mat-icon></button>
-          <button mat-icon-button (click)="clearAllValues()"><mat-icon>clear</mat-icon></button>
-          <button mat-icon-button><mat-icon>add</mat-icon></button>
+          <button mat-icon-button (click)="generateRandomValues()">
+            <mat-icon>autorenew</mat-icon>
+          </button>
+          <button mat-icon-button (click)="clearAllValues()">
+            <mat-icon>clear</mat-icon>
+          </button>
         </div>
       </div>
       <div>
-        <mat-form-field *ngFor="let table of tables">
+        <div *ngFor="let tableKey of tableKeys">
+          <mat-card>
+            <p>{{tableKey.name}}</p>
+            <mat-form-field *ngFor="let field of tableKey.fields">
+              <input matInput placeholder="{{field}}">
+            </mat-form-field>
+          </mat-card>
+          <div>
+            <button mat-button disabled></button>
+          </div>
+        </div>
+        <!-- <button mat-icon-button>
+          <mat-icon disabled></mat-icon>
+        </button> -->
+        <!-- <mat-form-field *ngFor="let table of tables">
           <mat-label>{{table.name}}</mat-label>
           <input matInput spellcheck="false" (keydown)="sendValues($event, table.name)"
             (keyup)="sendValues($event, table.name)"
             [formControl]="myControl"
             [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of statusOptions"
+            <mat-option
             [value]="option">{{option}}</mat-option>
           </mat-autocomplete>
-        </mat-form-field>
+        </mat-form-field> -->
         <div *ngFor="let table of tables">
-          <insert 
-          *ngIf="getEntityByName(table.name, tables ).fields | isempty"
-          [table]="getEntityByName(table.name, observables).fields"></insert>
+          <insert *ngIf="getEntityByName(table.name, tables ).fields | isempty"
+            [table]="getEntityByName(table.name, observables).fields"></insert>
         </div>
       </div>
     </group>
