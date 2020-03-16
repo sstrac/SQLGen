@@ -20,7 +20,11 @@
       <div>
         <div *ngFor="let tableKey of tableKeys">
           <mat-card>
-            <p>{{tableKey.name}}</p>
+            <p>{{tableKey.name}}
+              <span><button mat-icon-button>
+                <mat-icon>add</mat-icon>
+              </button></span>
+            </p>
             <mat-form-field *ngFor="let field of tableKey.fields">
               <input matInput placeholder="{{field}}">
             </mat-form-field>

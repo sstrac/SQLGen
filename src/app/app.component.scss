@@ -1,5 +1,6 @@
 mat-form-field{
     width: 10em;
+    height: 3em;
     padding-right: 0.8em;
     font-size: 0.8em;;
 }
@@ -7,13 +8,6 @@ mat-toolbar{
     display: flex;
     width: 100%;
 }
-mat-divider{
-    background-color: blue
-}
-// button{
-//     border-color: black;
-//     border-width: medium;
-// }
 mat-icon{
     padding-bottom: 5px;
 }
