@@ -2,98 +2,68 @@
     "tables": [
         {
             "name": "job_vacancy",
-            "fields": {},
-            "fieldKeys": [
-                "id",
-                "category",
-                "closing_method",
-                "dedication",
-                "description",
-                "required_experience",
-                "status",
-                "version",
-                "job_id"
-            ],
-            "options": [
-                {
-                    "field": "category",
-                    "options": [ 1, 2, 3 ]
-                },
-                {
-                    "field": "dedication",
-                    "options": [ 1, 2, 3 ]
-                },
-                {
-                    "field": "status",
-                    "options": [ "open", "close" ]
-                }
-            ]
+            "fields": {
+                "id": "",
+                "category": "",
+                "closing_method": "",
+                "dedication": "",
+                "description": "",
+                "required_experience": "",
+                "status": "",
+                "version": "",
+                "job_id": ""
+            },
+            "options": {
+                "category": [ 1, 2, 3 ],
+                "dedication": [ 1, 2, 3 ],
+                "status": [ "open", "close" ]
+            }
         },
         {
             "name": "job",
-            "fields": {},
-            "fieldKeys": [
-            "id",
-            "description",
-            "distance",
-            "image_url",
-            "name",
-            "version",
-            "category",
-            "published_date",
-            "updated_date",
-            "event_name",
-            "status",
-            "type",
-            "owner_id"
-            ],
-            "options": [
-                {
-                    "field": "category",
-                    "options": [ 1, 2, 3 ]
-                },
-                {
-                    "field": "type",
-                    "options": [ 1, 2, 3 ]
-                },
-                {
-                    "field": "status",
-                    "options": [ "open", "close" ]
-                }
-            ]
+            "fields": {
+                "id": "",
+                "description": "",
+                "distance": "",
+                "image_url": "",
+                "name": "",
+                "version": "",
+                "category": "",
+                "published_date": "",
+                "updated_date": "",
+                "event_name": "",
+                "status": "",
+                "type": "",
+                "owner_id": ""
+            },
+            "options": {
+                "category": [ 1, 2, 3 ],
+                "type": [ 1, 2, 3 ],
+                "status": [ "open", "close" ]
+            }
         },
         {
             "name": "profile",
-            "fields": {},
-            "fieldKeys": [
-            "id",
-            "description",
-            "distance",
-            "image_url",
-            "name",
-            "version",
-            "background_image_url",
-            "category",
-            "email",
-            "job_title",
-            "rating",
-            "web_url",
-            "account_id"
-            ],
-            "options": [
-                {
-                    "field": "category",
-                    "options": [ 1, 2, 3 ]
-                },
-                {
-                    "field": "job_title",
-                    "options": [ "searching guitarist" ]
-                },
-                {
-                    "field": "rating",
-                    "options": [ 1, 3, 10 ]
-                }
-            ]
+            "fields": {
+                "id": "",
+                "description": "",
+                "distance": "",
+                "image_url": "",
+                "name": "",
+                "version": "",
+                "background_image_url": "",
+                "category": "",
+                "email": "",
+                "job_title": "",
+                "rating": "",
+                "web_url": "",
+                "account_id": ""
+            },
+            "options": {
+                "category": [ 1, 2, 3 ],
+                "job_title": [ "searching guitarist" ],
+                "rating": [ 1,2,3,4,5,6,7,8,9,10 ]
+            }
         }
     ]
 }
