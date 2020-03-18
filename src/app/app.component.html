@@ -1,31 +1,29 @@
 <mat-toolbar color="accent">SQL Gen
 </mat-toolbar>
-<mat-drawer-container style="height: 100%">
-  <mat-drawer position="end" mode="side" opened="true">
-    <sidenav-content [tableKeys]=tableKeys></sidenav-content>
-  </mat-drawer>
-  <mat-drawer-content>
-    <group>
-      <div class="flex">
-        <p><strong>Easy Input</strong></p>
-        <div>
-          <button mat-icon-button (click)="generateRandomValues()"><mat-icon>autorenew</mat-icon></button>
-          <button mat-icon-button (click)="clearAllValues()"><mat-icon>clear</mat-icon></button>
-          <button mat-icon-button><mat-icon>add</mat-icon></button>
-        </div>
-      </div>
-      <div>
-        <mat-form-field *ngFor="let table of tables">
-          <mat-label>{{table.name}}</mat-label>
-          <input matInput spellcheck="false" (keydown)="sendValues($event, table.name)"
-            (keyup)="sendValues($event, table.name)">
-        </mat-form-field>
-        <div *ngFor="let table of tables">
-          <insert 
-          *ngIf="getEntityByName(table.name, tables ).fields | isempty"
-          [table]="getEntityByName(table.name, observables).fields"></insert>
-        </div>
-      </div>
-    </group>
-  </mat-drawer-content>
-</mat-drawer-container>
+<mat-card *ngFor="let table of tables">
+    <mat-card-subtitle><b>{{table.name}}</b></mat-card-subtitle>
+    <mat-form-field *ngFor="let field of table.fields | keyvaluearr:'keys'">
+        <mat-label>{{field}}</mat-label>
+        <mat-select [(ngModel)]="table.fields[field]">
+            <mat-option *ngFor="let option of table.options[field]" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-card>
+<group>
+    <div *ngFor="let table of tables">
+        <a>INSERT INTO {{table.name}} (
+            <a *ngFor="let tableField of table.fields | keyvaluearr:'keys'">
+                <a *ngIf="tableField!=(table.fields | keyvaluearr:'keys')[0]">,</a>
+                '{{tableField}}'
+            </a>
+            ) VALUES (
+            <a *ngFor="let tableValue of table.fields | keyvaluearr:'values'">
+                <a *ngIf="tableValue!=(table.fields | keyvaluearr:'values')[0]">,</a>
+                '{{tableValue}}'
+            </a>
+            )
+        </a>
+    </div>
+</group>

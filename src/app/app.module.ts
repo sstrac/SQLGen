@@ -2,30 +2,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule } from '@angular/material'
-import { InsertComponent } from './insert/insert.component';
+import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule, MatAutocompleteModule, MatFormField, MatOptionModule, MatDividerModule, MatCardModule, MatSelectModule } from '@angular/material'
 import { IsEmptyPipe } from './shared/isempty.pipe';
 import { GroupComponent } from './shared/group.component';
 import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
+import { KeyValueArrPipe } from './shared/keyvaluearr.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InsertComponent,
     GroupComponent,
     SidenavContentComponent,
-    IsEmptyPipe
+    IsEmptyPipe,
+    KeyValueArrPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
+    MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatToolbarModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatCardModule,
     MatButtonModule,
     MatIconModule
   ],
