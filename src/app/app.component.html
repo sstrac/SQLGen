@@ -1,17 +1,17 @@
 <mat-toolbar color="accent">SQL Gen
 </mat-toolbar>
+<mat-card *ngFor="let table of tables">
+    <mat-card-subtitle><b>{{table.name}}</b></mat-card-subtitle>
+    <mat-form-field *ngFor="let field of table.fields | keyvaluearr:'keys'">
+        <mat-label>{{field}}</mat-label>
+        <mat-select [(ngModel)]="table.fields[field]">
+            <mat-option *ngFor="let option of table.options[field]" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-card>
 <group>
-    <div *ngFor="let table of tables">
-        <div><b>{{table.name}}</b></div>
-        <mat-form-field *ngFor="let field of table.fields | keyvaluearr:'keys'">
-            <mat-label>{{field}}</mat-label>
-            <mat-select [(ngModel)]="table.fields[field]">
-                <mat-option *ngFor="let option of table.options[field]" [value]="option">
-                    {{option}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
     <div *ngFor="let table of tables">
         <a>INSERT INTO {{table.name}} (
             <a *ngFor="let tableField of table.fields | keyvaluearr:'keys'">

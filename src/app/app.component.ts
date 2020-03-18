@@ -1,6 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
 import * as TABLES from '../assets/tables.json'
-import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,6 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  key = 'keys'
   tables = TABLES.default.tables
 
   ngOnInit(){
