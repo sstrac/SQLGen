@@ -4,18 +4,19 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule, MatAutocompleteModule, MatOptionModule, MatDividerModule, MatCardModule, MatSelectModule, MatCheckboxModule } from '@angular/material'
+import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule, MatAutocompleteModule, MatOptionModule, MatDividerModule, MatCardModule, MatSelectModule, MatCheckboxModule, MatTabsModule } from '@angular/material'
 import { IsEmptyPipe } from './shared/isempty.pipe';
 import { GroupComponent } from './shared/group.component';
 import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
 import { KeyValueArrPipe } from './shared/keyvaluearr.pipe';
 import { InsertComponent } from './statements/insert.component';
 import { SelectComponent } from './statements/select.component';
-import { NewTableComponent } from './new-table.component';
+import { NewTableComponent } from './new-table/new-table.component';
 import { routes } from 'src/routes';
 import { RouterModule } from '@angular/router'
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { LocalStorageService } from './services/local-storage.service';
+import { GeneratorComponent } from './generator/generator.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LocalStorageService } from './services/local-storage.service';
     KeyValueArrPipe,
     InsertComponent,
     SelectComponent,
-    NewTableComponent
+    NewTableComponent,
+    GeneratorComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { LocalStorageService } from './services/local-storage.service';
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
+    MatTabsModule,
     StorageServiceModule,
     RouterModule.forRoot(routes)
   ],
