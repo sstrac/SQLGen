@@ -1,0 +1,10 @@
+<span>INSERT INTO {{table}} (</span>
+<span *ngFor="let field of fields">
+    <span *ngIf="field!=fields[0]">,</span>
+    '{{field}}'
+</span>
+<span>) VALUES (</span>
+<span *ngFor="let value of field_values">
+    <span *ngIf="value!=field_values[0]">,</span>
+    '{{value}}'
+</span>)

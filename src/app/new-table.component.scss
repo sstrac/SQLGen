@@ -1,0 +1,20 @@
+.flex_space_between{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.mat_icon_remove{
+    background-color: #ff4081;
+    color: white;
+}
+mat-card-header{
+    background: #ff4081;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 10px;
+    color:white;
+}
+mat-card{
+    padding:0;
+    width: fit-content;
+}
