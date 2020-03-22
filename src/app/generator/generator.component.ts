@@ -3,7 +3,8 @@ import { TableDataService } from '../services/table-data.service'
 
 @Component({
     selector: 'generator',
-    templateUrl: './generator.component.html'
+    templateUrl: './generator.component.html',
+    styleUrls: ['./generator.component.scss']
 })
 export class GeneratorComponent{
     statementOptions = ['Select', 'Insert']
@@ -17,13 +18,14 @@ export class GeneratorComponent{
     }
 
     toggleFieldActive(field){
-        console.log(this.activeFields)
+        let style = { 'background-color': 'pink'}
         if(this.activeFields.indexOf(field)>-1){
             this.activeFields.splice(this.activeFields.indexOf(field), 1)
         }else if(this.activeFields.indexOf(field)<=-1){
+            style = { 'background-color': 'lightgrey'}
             this.activeFields.push(field)
         }
-        console.log(this.activeFields)
+        return style
     }
 
     setSelectedTable(tablename){
