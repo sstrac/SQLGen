@@ -8,7 +8,7 @@ import { LocalStorageService } from '../services/local-storage.service';
   styleUrls: ['./new-table.component.scss']
 })
 export class NewTableComponent{
-    fields = [{fieldname: '', type: ''}]
+    fields = []
     stringType: boolean = true
     tableName = new FormControl()
     field = new FormControl();
@@ -45,5 +45,7 @@ export class NewTableComponent{
     onSubmit(){
         let table = { name: this.tableName.value, fields: this.fields}
         this.localStorage.storeLocally(table)
+        this.fields = []
+        this.tableName.reset()
     }
 }

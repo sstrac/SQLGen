@@ -19,11 +19,16 @@
         <!-- select {{tablefields} from {{Table}} where {{tablefield =/IN value}}-->
         <div *ngIf="statement.selected.value==='Select' && table" class="rounded_box">
             <div style="margin-bottom: 0.7em;">SELECT
-                    <span *ngFor="let field of activeFields">
-                        <span *ngIf="field!==activeFields[0]">,</span>
-                        '{{field}}'
+                <span [ngSwitch]="arraysEqual(allFields, activeFields)">
+                    <span *ngSwitchCase="true">*</span>
+                    <span *ngSwitchCase="false">
+                        <span *ngFor="let field of activeFields">
+                            <span *ngIf="field!==activeFields[0]">,</span>
+                            {{field}}
+                        </span>
                     </span>
-                    FROM {{table.name}}
+                </span>
+                FROM {{table.name}}
                 <button mat-icon-button>
                     <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
                 </button>

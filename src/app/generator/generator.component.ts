@@ -41,9 +41,20 @@ export class GeneratorComponent{
         this.activeFields = this.table.fields.map( field => field.fieldname )
     }
 
+    arraysEqual(a, b) {
+        a.sort()
+        b.sort()
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length != b.length) return false;
+      
+        for (var i = 0; i < a.length; ++i) {
+          if (a[i] !== b[i]) return false;
+        }
+        return true;
+      }
 
-
-    log(){
-        
-    }
+}
+export function log(input){
+        console.log(input)
 }
