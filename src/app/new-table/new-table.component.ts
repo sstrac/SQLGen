@@ -44,7 +44,6 @@ export class NewTableComponent{
 
     onSubmit(){
         let table = { name: this.tableName.value, fields: this.fields}
-        console.log(table)
         this.localStorage.storeLocally(table)
     }
 }

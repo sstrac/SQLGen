@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule, MatAutocompleteModule, MatOptionModule, MatDividerModule, MatCardModule, MatSelectModule, MatCheckboxModule, MatTabsModule } from '@angular/material'
+import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule, MatAutocompleteModule, MatOptionModule, MatDividerModule, MatCardModule, MatSelectModule, MatCheckboxModule, MatTabsModule, MatChipsModule } from '@angular/material'
 import { IsEmptyPipe } from './shared/isempty.pipe';
 import { GroupComponent } from './shared/group.component';
 import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router'
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { LocalStorageService } from './services/local-storage.service';
 import { GeneratorComponent } from './generator/generator.component';
+import { TableDataService } from './services/table-data.service';
 
 @NgModule({
   declarations: [
@@ -45,11 +46,12 @@ import { GeneratorComponent } from './generator/generator.component';
     MatIconModule,
     MatCheckboxModule,
     MatTabsModule,
+    MatChipsModule,
     StorageServiceModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [LocalStorageService],
+  providers: [LocalStorageService, TableDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

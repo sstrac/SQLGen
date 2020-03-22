@@ -20,4 +20,8 @@ export class LocalStorageService {
           //this.storage.remove - to remove from local storage
      }
 
+     public getStorage(){
+          return this.storage.get(STORAGE_KEY)
+     }
+
 }
