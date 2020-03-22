@@ -18,6 +18,7 @@ import { StorageServiceModule } from 'ngx-webstorage-service';
 import { LocalStorageService } from './services/local-storage.service';
 import { GeneratorComponent } from './generator/generator.component';
 import { TableDataService } from './services/table-data.service';
+import { PracticeComponent } from './practice.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TableDataService } from './services/table-data.service';
     InsertComponent,
     SelectComponent,
     NewTableComponent,
-    GeneratorComponent
+    GeneratorComponent,
+    PracticeComponent
   ],
   imports: [
     BrowserModule,

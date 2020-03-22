@@ -1,69 +1,11 @@
 {
     "tables": [
         {
-            "name": "job_vacancy",
-            "fields": {
-                "id": "",
-                "category": "",
-                "closing_method": "",
-                "dedication": "",
-                "description": "",
-                "required_experience": "",
-                "status": "",
-                "version": "",
-                "job_id": ""
-            },
-            "options": {
-                "category": [ 1, 2, 3 ],
-                "dedication": [ 1, 2, 3 ],
-                "status": [ "open", "close" ]
-            }
-        },
-        {
-            "name": "job",
-            "fields": {
-                "id": "",
-                "description": "",
-                "distance": "",
-                "image_url": "",
-                "name": "",
-                "version": "",
-                "category": "",
-                "published_date": "",
-                "updated_date": "",
-                "event_name": "",
-                "status": "",
-                "type": "",
-                "owner_id": ""
-            },
-            "options": {
-                "category": [ 1, 2, 3 ],
-                "type": [ 1, 2, 3 ],
-                "status": [ "open", "close" ]
-            }
-        },
-        {
-            "name": "profile",
-            "fields": {
-                "id": "",
-                "description": "",
-                "distance": "",
-                "image_url": "",
-                "name": "",
-                "version": "",
-                "background_image_url": "",
-                "category": "",
-                "email": "",
-                "job_title": "",
-                "rating": "",
-                "web_url": "",
-                "account_id": ""
-            },
-            "options": {
-                "category": [ 1, 2, 3 ],
-                "job_title": [ "searching guitarist" ],
-                "rating": [ 1,2,3,4,5,6,7,8,9,10 ]
-            }
+            "name": "subLedger",
+            "fields": [
+                { "fieldname": "pnldate", "type": "string" },
+                { "fieldname": "balance", "type": "number" }
+            ]
         }
     ]
 }

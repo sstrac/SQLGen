@@ -17,19 +17,20 @@
     </mat-form-field>
     <div *ngIf="statement.selected">
         <!-- select {{tablefields} from {{Table}} where {{tablefield =/IN value}}-->
-        <div *ngIf="statement.selected.value==='Select'" class="rounded_box">
-            <div style="margin-bottom: 0.7em;">SELECT <span *ngIf="table">
+        <div *ngIf="statement.selected.value==='Select' && table" class="rounded_box">
+            <div style="margin-bottom: 0.7em;">SELECT
                     <span *ngFor="let field of activeFields">
-                        {{field}}
+                        <span *ngIf="field!==activeFields[0]">,</span>
+                        '{{field}}'
                     </span>
                     FROM {{table.name}}
-                </span>
                 <button mat-icon-button>
                     <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
                 </button>
             </div>
             <mat-chip-list>
-                <mat-chip *ngFor="let field of allFields" [ngStyle]="toggleFieldActive(field)" (click)="toggleFieldActive(field)">{{field}}</mat-chip>
+                <mat-chip *ngFor="let field of allFields" [ngStyle]="toggleActiveStyle(field)"
+                    (click)="toggleFieldActive(field)">{{field}}</mat-chip>
             </mat-chip-list>
         </div>
     </div>
@@ -37,3 +38,4 @@
         <span *ngIf="statement.selected.value==='Insert'" class="rounded_box"></span>
     </div>
 </group>
+<!-- <practice></practice> -->

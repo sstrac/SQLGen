@@ -18,12 +18,19 @@ export class GeneratorComponent{
     }
 
     toggleFieldActive(field){
-        let style = { 'background-color': 'pink'}
         if(this.activeFields.indexOf(field)>-1){
             this.activeFields.splice(this.activeFields.indexOf(field), 1)
         }else if(this.activeFields.indexOf(field)<=-1){
-            style = { 'background-color': 'lightgrey'}
             this.activeFields.push(field)
+        }
+    }
+
+    toggleActiveStyle(field){
+        let style = {}
+        if(this.activeFields.indexOf(field)>-1){
+            style = { 'background-color': 'pink' }
+        }else if(this.activeFields.indexOf(field)<=-1){
+            style = { 'background-color': 'lightgrey'}
         }
         return style
     }
