@@ -1,9 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; margin: 0; background-color: rgb(247, 230, 237);}
-body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; margin: 0;}
+body { font-family: Roboto, "Helvetica Neue Light" , "Helvetica Neue", "Helvetica,Arial", "Lucida Grande", sans-serif; }
 .flex{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+}
+.flex_column{
+    display: flex;
+    flex-direction: column;
+}
+mat-icon{
+    border-radius: 50%;
+}
+.rounded_box{
+    border-radius: 3%;
+    // border: solid;
+    // border-width: thin;
+    // border-color: rgb(156, 156, 156);
+    width: fit-content;
+    height: fit-content;
+    box-shadow: 1px 1px 3px rgb(209, 209, 209);
+    padding: 1em;
 }

@@ -1,0 +1,67 @@
+<group>
+    <mat-form-field>
+        <mat-label>Statement</mat-label>
+        <mat-select #statement>
+            <mat-option *ngFor="let option of statementOptions" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Table</mat-label>
+        <mat-select #selectedtable (selectionChange)="setSelectedTable(selectedtable.selected.value)">
+            <mat-option *ngFor="let table of tables" [value]="table.name">
+                {{table.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div *ngIf="statement.selected">
+        <div *ngIf="statement.selected.value==='Select' && table" class="rounded_box">
+            <div style="margin-bottom: 0.7em;">SELECT
+                <span [ngSwitch]="arraysEqual(allFields, activeFields)">
+                    <span *ngSwitchCase="true">*</span>
+                    <span *ngSwitchCase="false">
+                        <span *ngFor="let field of activeFields">
+                            <span *ngIf="field!==activeFields[0]">,</span>
+                            {{field}}
+                        </span>
+                    </span>
+                </span>
+                FROM {{table.name}}
+                <button mat-icon-button>
+                    <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
+                </button>
+            </div>
+            <mat-chip-list>
+                <mat-chip *ngFor="let field of allFields" [ngStyle]="toggleActiveStyle(field)"
+                    (click)="toggleFieldActive(field)">{{field}}</mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+    <div *ngIf="statement.selected">
+        <div *ngIf="statement.selected.value==='Insert' && table">
+            <mat-form-field>
+                <mat-label>Field Values</mat-label>
+                <input matInput [(ngModel)]="fieldValues">
+            </mat-form-field>
+            <div class="rounded_box">
+                <div style="margin-bottom: 0.7em;">INSERT INTO {{table.name}} (
+                    <span *ngFor="let field of activeFields">
+                        <span *ngIf="field!==activeFields[0]">,</span>
+                        {{field}}
+                    </span>
+                    ) VALUES (
+                    <span *ngFor="let value of getFieldValueArray()">
+                        <span *ngIf="value!=getFieldValueArray()[0]">,</span>
+                        '{{value}}'
+                    </span>
+                    )
+                    <button mat-icon-button>
+                        <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</group>
+<!-- <practice></practice> -->

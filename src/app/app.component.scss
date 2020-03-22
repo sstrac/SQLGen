@@ -2,7 +2,7 @@ mat-form-field{
     width: 10em;
     height: 3em;
     padding-right: 0.8em;
-    font-size: 0.8em;;
+    font-size: 1.1em;;
 }
 mat-toolbar{
     display: flex;
@@ -16,4 +16,7 @@ mat-card{
 }
 mat-card-subtitle{
     margin-bottom: 0px;
+}
+div{
+    margin-top: 0.5em
 }
