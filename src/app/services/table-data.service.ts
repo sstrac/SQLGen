@@ -3,13 +3,19 @@ import { LocalStorageService } from './local-storage.service';
 import * as TABLES from '../../assets/tables.json'
 
 @Injectable()
-export class TableDataService{
+export class TableDataService {
 
 
-    constructor(private localStorage: LocalStorageService){}
+    constructor(private localStorage: LocalStorageService) { }
 
-    getTables(){
-        return this.localStorage.getStorage().concat(TABLES.default.tables)
+    getTables() {
+        let softStorage = this.localStorage.getStorage()
+        let hardStorage = TABLES.default.tables
+        if (softStorage !== undefined && hardStorage !== undefined) {
+            return hardStorage.concat(softStorage)
+        } else {
+            return hardStorage!==undefined ? hardStorage : softStorage 
+        }
     }
 }
 interface Table {

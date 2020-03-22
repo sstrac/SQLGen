@@ -31,6 +31,7 @@ import { PracticeComponent } from './practice.component';
     SelectComponent,
     NewTableComponent,
     GeneratorComponent,
+    SelectComponent,
     PracticeComponent
   ],
   imports: [

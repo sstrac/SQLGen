@@ -8,13 +8,22 @@ import { TableDataService } from '../services/table-data.service'
 })
 export class GeneratorComponent{
     statementOptions = ['Select', 'Insert']
+    //for select/insert
     tables = []
     table = { name: '', fields: []}
     allFields = []
     activeFields = []
 
+    //only for insert
+    fieldValues = ''
+
     constructor(private tableData: TableDataService){
         this.tables = tableData.getTables()
+    }
+
+    //only for insert
+    getFieldValueArray(){
+        return this.fieldValues.split(',')
     }
 
     toggleFieldActive(field){
@@ -56,5 +65,5 @@ export class GeneratorComponent{
 
 }
 export function log(input){
-        console.log(input)
+    console.log(input)
 }

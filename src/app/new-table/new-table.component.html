@@ -5,10 +5,10 @@
         </mat-card-header>
         <mat-card-content>
             <group>
-                <form (ngSubmit)="onSubmit()">
+                <form (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSubmit()">
                     <mat-form-field>
                         <mat-label>Table Name</mat-label>
-                        <input matInput [formControl]="tableName">
+                        <input matInput [formControl]="tableName" required>
                     </mat-form-field>
                     <form (ngSubmit)="addField()">
                         <div class="flex">
@@ -31,7 +31,7 @@
                             <p>Field Name: {{field.fieldname}}, Field Type: {{field.type}}</p>
                         </div>
                     </form>
-                    <button mat-button type=submit>Submit</button>
+                    <button mat-button type=submit [disabled]="tableName.status==='INVALID'">Submit</button>
                 </form>
             </group>
         </mat-card-content>

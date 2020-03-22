@@ -1,10 +1,14 @@
 {
     "tables": [
         {
-            "name": "subLedger",
+            "name": "Books",
             "fields": [
-                { "fieldname": "pnldate", "type": "string" },
-                { "fieldname": "balance", "type": "number" }
+                { "fieldname": "pages", "type": "number" },
+                { "fieldname": "title", "type": "string" },
+                { "fieldname": "cover_color", "type": "string" },
+                { "fieldname": "pen", "type": "number" },
+                { "fieldname": "blurb", "type": "string" },
+                { "fieldname": "author", "type": "string" }
             ]
         }
     ]

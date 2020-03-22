@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LocalStorageService } from '../services/local-storage.service';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'new-table',
@@ -10,7 +11,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 export class NewTableComponent{
     fields = []
     stringType: boolean = true
-    tableName = new FormControl()
+    tableName = new FormControl();
     field = new FormControl();
 
     constructor(private localStorage: LocalStorageService){

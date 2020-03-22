@@ -16,7 +16,6 @@
         </mat-select>
     </mat-form-field>
     <div *ngIf="statement.selected">
-        <!-- select {{tablefields} from {{Table}} where {{tablefield =/IN value}}-->
         <div *ngIf="statement.selected.value==='Select' && table" class="rounded_box">
             <div style="margin-bottom: 0.7em;">SELECT
                 <span [ngSwitch]="arraysEqual(allFields, activeFields)">
@@ -40,7 +39,29 @@
         </div>
     </div>
     <div *ngIf="statement.selected">
-        <span *ngIf="statement.selected.value==='Insert'" class="rounded_box"></span>
+        <div *ngIf="statement.selected.value==='Insert' && table">
+            <mat-form-field>
+                <mat-label>Field Values</mat-label>
+                <input matInput [(ngModel)]="fieldValues">
+            </mat-form-field>
+            <div class="rounded_box">
+                <div style="margin-bottom: 0.7em;">INSERT INTO {{table.name}} (
+                    <span *ngFor="let field of activeFields">
+                        <span *ngIf="field!==activeFields[0]">,</span>
+                        {{field}}
+                    </span>
+                    ) VALUES (
+                    <span *ngFor="let value of getFieldValueArray()">
+                        <span *ngIf="value!=getFieldValueArray()[0]">,</span>
+                        '{{value}}'
+                    </span>
+                    )
+                    <button mat-icon-button>
+                        <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </group>
 <!-- <practice></practice> -->
