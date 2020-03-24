@@ -1,7 +1,7 @@
 <group>
     <mat-form-field>
         <mat-label>Statement</mat-label>
-        <mat-select #statement>
+        <mat-select #selectedStatement (selectionChange)="setSelectedStatementChoice(selectedStatement.selected.value)">
             <mat-option *ngFor="let option of statementOptions" [value]="option">
                 {{option}}
             </mat-option>
@@ -9,58 +9,75 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Table</mat-label>
-        <mat-select #selectedtable (selectionChange)="setSelectedTable(selectedtable.selected.value)">
+        <mat-select #selectedTable (selectionChange)="setSelectedTable(selectedTable.selected.value)">
             <mat-option *ngFor="let table of tables" [value]="table.name">
                 {{table.name}}
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <div *ngIf="statement.selected">
-        <div *ngIf="statement.selected.value==='Select' && table" class="rounded_box">
-            <div style="margin-bottom: 0.7em;">SELECT
-                <span [ngSwitch]="arraysEqual(allFields, activeFields)">
-                    <span *ngSwitchCase="true">*</span>
-                    <span *ngSwitchCase="false">
-                        <span *ngFor="let field of activeFields">
-                            <span *ngIf="field!==activeFields[0]">,</span>
-                            {{field}}
-                        </span>
-                    </span>
+    <div *ngIf="statementChoice==='Select' && table">
+        <form [formGroup]="conditionForm" (ngSubmit)="addCondition()">
+            <mat-form-field>
+                <mat-label>Conditions</mat-label>
+                <mat-select formControlName="conditionField">
+                    <mat-option *ngFor="let condition of allFields" [value]="condition">
+                        {{condition}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width: 3em;">
+                <mat-select formControlName="operand">
+                    <mat-option *ngFor="let operand of ['=','IN']" [value]="operand">
+                        {{operand}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput formControlName="conditionValue" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1" spellcheck="false"></textarea>
+            </mat-form-field>
+            <button mat-icon-button type=submit>
+                <mat-icon style="color: blue; font-size: 20px;">add</mat-icon>
+            </button>
+        </form>
+        <div style="margin-bottom: 0.7em;" class="rounded_box">
+            <textarea matInput [value]="generateSelectStatement()" spellcheck="false" cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"></textarea>
+            <button mat-icon-button>
+                <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
+            </button>
+        </div>
+        <mat-chip-list>
+            <mat-chip *ngFor="let field of allFields" [ngStyle]="toggleChipStyle(field, 'field')"
+                (click)="toggleChipActive(field, 'field')">{{field}}</mat-chip>
+        </mat-chip-list>
+        <mat-chip-list>
+            <mat-chip *ngFor="let condition of conditions" [ngStyle]="toggleChipStyle(condition, 'condition')"
+                (click)="toggleChipActive(condition, 'condition')">{{condition}}</mat-chip>
+        </mat-chip-list>
+    </div>
+    <div *ngIf="statementChoice==='Insert' && table">
+        <mat-form-field>
+            <mat-label>Field Values</mat-label>
+            <input matInput [(ngModel)]="fieldValues">
+        </mat-form-field>
+        <div class="rounded_box">
+            <div style="margin-bottom: 0.7em;">INSERT INTO {{table.name}} (
+                <span *ngFor="let field of activeFields">
+                    <span *ngIf="field!==activeFields[0]">,</span>
+                    {{field}}
                 </span>
-                FROM {{table.name}}
+                ) VALUES (
+                <span *ngFor="let value of getFieldValueArray()">
+                    <span *ngIf="value!=getFieldValueArray()[0]">,</span>
+                    '{{value}}'
+                </span>
+                )
                 <button mat-icon-button>
                     <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
                 </button>
             </div>
-            <mat-chip-list>
-                <mat-chip *ngFor="let field of allFields" [ngStyle]="toggleActiveStyle(field)"
-                    (click)="toggleFieldActive(field)">{{field}}</mat-chip>
-            </mat-chip-list>
-        </div>
-    </div>
-    <div *ngIf="statement.selected">
-        <div *ngIf="statement.selected.value==='Insert' && table">
-            <mat-form-field>
-                <mat-label>Field Values</mat-label>
-                <input matInput [(ngModel)]="fieldValues">
-            </mat-form-field>
-            <div class="rounded_box">
-                <div style="margin-bottom: 0.7em;">INSERT INTO {{table.name}} (
-                    <span *ngFor="let field of activeFields">
-                        <span *ngIf="field!==activeFields[0]">,</span>
-                        {{field}}
-                    </span>
-                    ) VALUES (
-                    <span *ngFor="let value of getFieldValueArray()">
-                        <span *ngIf="value!=getFieldValueArray()[0]">,</span>
-                        '{{value}}'
-                    </span>
-                    )
-                    <button mat-icon-button>
-                        <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
-                    </button>
-                </div>
-            </div>
+
         </div>
     </div>
 </group>

@@ -9,8 +9,6 @@ import { IsEmptyPipe } from './shared/isempty.pipe';
 import { GroupComponent } from './shared/group.component';
 import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
 import { KeyValueArrPipe } from './shared/keyvaluearr.pipe';
-import { InsertComponent } from './statements/insert.component';
-import { SelectComponent } from './statements/select.component';
 import { NewTableComponent } from './new-table/new-table.component';
 import { routes } from 'src/routes';
 import { RouterModule } from '@angular/router'
@@ -19,6 +17,7 @@ import { LocalStorageService } from './services/local-storage.service';
 import { GeneratorComponent } from './generator/generator.component';
 import { TableDataService } from './services/table-data.service';
 import { PracticeComponent } from './practice.component';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [
@@ -27,11 +26,8 @@ import { PracticeComponent } from './practice.component';
     SidenavContentComponent,
     IsEmptyPipe,
     KeyValueArrPipe,
-    InsertComponent,
-    SelectComponent,
     NewTableComponent,
     GeneratorComponent,
-    SelectComponent,
     PracticeComponent
   ],
   imports: [
@@ -50,6 +46,7 @@ import { PracticeComponent } from './practice.component';
     MatCheckboxModule,
     MatTabsModule,
     MatChipsModule,
+    TextFieldModule,
     StorageServiceModule,
     RouterModule.forRoot(routes)
   ],
