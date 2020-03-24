@@ -41,11 +41,13 @@
             </button>
         </form>
         <div style="margin-bottom: 0.7em;" class="rounded_box">
-            <textarea matInput [value]="generateSelectStatement()" spellcheck="false" cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"></textarea>
-            <button mat-icon-button>
-                <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
-            </button>
+            <div class="flex_space_between">
+                <textarea matInput [value]="generateSelectStatement()" spellcheck="false" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"></textarea>
+                <button mat-icon-button>
+                    <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
+                </button>
+            </div>
         </div>
         <mat-chip-list>
             <mat-chip *ngFor="let field of allFields" [ngStyle]="toggleChipStyle(field, 'field')"
