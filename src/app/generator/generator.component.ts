@@ -8,6 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms'
     styleUrls: ['./generator.component.scss']
 })
 export class GeneratorComponent {
+    statements: string[] = []
     statementOptions = ['Select', 'Insert']
     tables = []
     conditions: string[] = []
@@ -31,6 +32,9 @@ export class GeneratorComponent {
         this.tables = tableData.getTables()
     }
 
+    addStatement(statement){
+        this.statements.push(statement.value)
+    }
     //only for insert
     getFieldValueArray() {
         return this.fieldValues.split(',')
@@ -39,7 +43,6 @@ export class GeneratorComponent {
     //--------------
 
     addCondition() {
-        let joiningWord = this.conditions[0] === undefined ? " WHERE " : " AND "
         let values = ''
         let valueArray
         if (this.conditionForm.value.operand === "IN") {
@@ -52,17 +55,17 @@ export class GeneratorComponent {
                 }
             });
             values = values.concat(")")
-        } else if (this.conditionForm.value.operand === "=") {
+        } else if (this.conditionForm.value.operand === "=" || this.conditionForm.value.operand === "LIKE") {
             values = values.concat("'").concat(this.conditionForm.value.conditionValue).concat("'")
         }
-        let finalCondition = joiningWord.
-            concat(this.conditionForm.value.conditionField)
+        let finalCondition = this.conditionForm.value.conditionField
             .concat(" ")
             .concat(this.conditionForm.value.operand)
             .concat(" ")
             .concat(values)
 
         this.conditions.push(finalCondition)
+        this.activeConditions.push(finalCondition)
     }
 
 
@@ -75,18 +78,33 @@ export class GeneratorComponent {
                 fields += ", " + this.activeFields[i]
             }
         }
-        let conditions = this.activeConditions.join(" ")
-        return "SELECT ".concat(fields).concat(" FROM ").concat(this.table.name, conditions)
+        let joiningWord = (condition: string): string => { 
+            if(this.activeConditions[0] !== undefined)
+                return condition === this.activeConditions[0] ? ' WHERE ' + condition : ' AND ' + condition 
+            return ''
+        }
+        let conditions = ''
+        this.activeConditions.forEach( condition => conditions += joiningWord(condition))
+        return "SELECT ".concat(fields).concat(" FROM ").concat(this.table.name, conditions, ";")
+    }
+
+    generateInsertStatement(){
+        let joiningWord = this.activeConditions[0] === undefined ? " WHERE " : " AND "
+        let allFields = this.allFields.toString()
+        return "INSERT INTO ".concat(this.table.name + " (")
+        .concat(allFields + ") VALUES ('") + 
+        buffStringWithSeperator(this.fieldValues, ",", "','") + "');"
+    }
+
+    deleteCondition(condition){
+        this.conditions.splice(this.conditions.indexOf(condition), 1)
+        this.activeConditions.splice(this.activeConditions.indexOf(condition), 1)
     }
 
     toggleChipActive(element, type) {
         let arrayRef = type === 'field' ? this.activeFields
             : type === 'condition' ? this.activeConditions : undefined
-        if (arrayRef.indexOf(element) > -1) {
-            arrayRef.splice(arrayRef.indexOf(element), 1)
-        } else if (arrayRef.indexOf(element) <= -1) {
-            arrayRef.push(element)
-        }
+        toggleElementInArray(element, arrayRef)
     }
 
     toggleChipStyle(element, type) {
@@ -129,4 +147,23 @@ export function arraysEqual(a, b) {
         if (a[i] !== b[i]) return false;
     }
     return true;
+}
+export function toggleElementInArray(element, array){
+    if (array.indexOf(element) > -1) {
+        array.splice(array.indexOf(element), 1)
+    } else if (array.indexOf(element) <= -1) {
+        array.push(element)
+    }
+}
+export function buffStringWithSeperator(string: string, delimiter: string, sep: string): string{
+    let out = ''
+    const stringArr: string[] = string.split(delimiter)
+    stringArr.forEach( x => {
+        if(stringArr.indexOf(x) !== stringArr.length-1){
+            out += x + sep
+        } else {
+            out += x
+        }
+    })
+    return out
 }

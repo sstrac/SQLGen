@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule, MatAutocompleteModule, MatOptionModule, MatDividerModule, MatCardModule, MatSelectModule, MatCheckboxModule, MatTabsModule, MatChipsModule } from '@angular/material'
+import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule, MatAutocompleteModule, MatOptionModule, MatDividerModule, MatCardModule, MatSelectModule, MatCheckboxModule, MatTabsModule, MatChipsModule, MatBadgeModule } from '@angular/material'
 import { IsEmptyPipe } from './shared/isempty.pipe';
 import { GroupComponent } from './shared/group.component';
 import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
@@ -46,6 +46,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     MatCheckboxModule,
     MatTabsModule,
     MatChipsModule,
+    MatBadgeModule,
     TextFieldModule,
     StorageServiceModule,
     RouterModule.forRoot(routes)

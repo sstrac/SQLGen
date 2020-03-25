@@ -25,9 +25,9 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field style="width: 3em;">
+            <mat-form-field style="width: 4em;">
                 <mat-select formControlName="operand">
-                    <mat-option *ngFor="let operand of ['=','IN']" [value]="operand">
+                    <mat-option *ngFor="let operand of ['=','IN','LIKE']" [value]="operand">
                         {{operand}}
                     </mat-option>
                 </mat-select>
@@ -42,10 +42,10 @@
         </form>
         <div style="margin-bottom: 0.7em;" class="rounded_box">
             <div class="flex_space_between">
-                <textarea matInput [value]="generateSelectStatement()" spellcheck="false" cdkTextareaAutosize
-                    #autosize="cdkTextareaAutosize"></textarea>
-                <button mat-icon-button>
-                    <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
+                <textarea #selectStatement matInput [value]="generateSelectStatement()" spellcheck="false"
+                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"></textarea>
+                <button mat-button style="color: grey; font-size: 15px;" (click)="addStatement(selectStatement)">
+                    Add Statement
                 </button>
             </div>
         </div>
@@ -54,8 +54,12 @@
                 (click)="toggleChipActive(field, 'field')">{{field}}</mat-chip>
         </mat-chip-list>
         <mat-chip-list>
-            <mat-chip *ngFor="let condition of conditions" [ngStyle]="toggleChipStyle(condition, 'condition')"
-                (click)="toggleChipActive(condition, 'condition')">{{condition}}</mat-chip>
+            <div *ngFor="let condition of conditions">
+                <mat-chip [ngStyle]="toggleChipStyle(condition, 'condition')"
+                    (click)="toggleChipActive(condition, 'condition')">
+                    {{condition}}</mat-chip>
+            </div>
+
         </mat-chip-list>
     </div>
     <div *ngIf="statementChoice==='Insert' && table">
@@ -64,23 +68,19 @@
             <input matInput [(ngModel)]="fieldValues">
         </mat-form-field>
         <div class="rounded_box">
-            <div style="margin-bottom: 0.7em;">INSERT INTO {{table.name}} (
-                <span *ngFor="let field of activeFields">
-                    <span *ngIf="field!==activeFields[0]">,</span>
-                    {{field}}
-                </span>
-                ) VALUES (
-                <span *ngFor="let value of getFieldValueArray()">
-                    <span *ngIf="value!=getFieldValueArray()[0]">,</span>
-                    '{{value}}'
-                </span>
-                )
-                <button mat-icon-button>
-                    <mat-icon style="color: grey; font-size: 20px;">file_copy</mat-icon>
-                </button>
+            <div style="margin-bottom: 0.7em;">
+                <textarea matInput [value]="generateInsertStatement()"></textarea>
             </div>
 
         </div>
+    </div>
+    <div class="flex_space_between" style="width: 80%;">
+        <textarea style="margin-top: 0.7em;" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+            spellcheck="false" [value]="statements.join('\n')">
+    </textarea>
+        <button mat-icon-button [cdkCopyToClipboard]="statements">
+            <mat-icon style="color: grey; font-size: 20px; width:fit-content">file_copy</mat-icon>
+        </button>
     </div>
 </group>
 <!-- <practice></practice> -->
