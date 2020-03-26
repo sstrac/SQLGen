@@ -1,7 +1,7 @@
 <group>
     <mat-form-field>
         <mat-label>Statement</mat-label>
-        <mat-select #selectedStatement (selectionChange)="setSelectedStatementChoice(selectedStatement.selected.value)">
+        <mat-select #selectedStatement (selectionChange)="setSelectedStatementChoice(selectedStatement)">
             <mat-option *ngFor="let option of statementOptions" [value]="option">
                 {{option}}
             </mat-option>
@@ -9,7 +9,7 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Table</mat-label>
-        <mat-select #selectedTable (selectionChange)="setSelectedTable(selectedTable.selected.value)">
+        <mat-select #selectedTable (selectionChange)="setSelectedTable(selectedTable)">
             <mat-option *ngFor="let table of tables" [value]="table.name">
                 {{table.name}}
             </mat-option>
@@ -37,16 +37,23 @@
                     cdkAutosizeMinRows="1" spellcheck="false"></textarea>
             </mat-form-field>
             <button mat-icon-button type=submit>
-                <mat-icon style="color: blue; font-size: 20px;">add</mat-icon>
+                <mat-icon color="primary">add</mat-icon>
             </button>
         </form>
         <div style="margin-bottom: 0.7em;" class="rounded_box">
-            <div class="flex_space_between">
+            <div class="flex_space_between" style="color: grey;">
                 <textarea #selectStatement matInput [value]="generateSelectStatement()" spellcheck="false"
                     cdkTextareaAutosize #autosize="cdkTextareaAutosize"></textarea>
-                <button mat-button style="color: grey; font-size: 15px;" (click)="addStatement(selectStatement)">
-                    Add Statement
-                </button>
+                <div class="flex">
+                    <button mat-stroked-button [cdkCopyToClipboard]="selectStatement.value"
+                        (click)="openCopiedNotification()">
+                        Quick
+                        <mat-icon style="font-size: 20px; width:fit-content">file_copy</mat-icon>
+                    </button>
+                    <button mat-stroked-button (click)="addStatement(selectStatement)" style="margin-left: 0.5em;">
+                        Add Statement
+                    </button>
+                </div>
             </div>
         </div>
         <mat-chip-list>
@@ -67,18 +74,29 @@
             <mat-label>Field Values</mat-label>
             <input matInput [(ngModel)]="fieldValues">
         </mat-form-field>
-        <div class="rounded_box">
-            <div style="margin-bottom: 0.7em;">
-                <textarea matInput [value]="generateInsertStatement()"></textarea>
+        <div style="margin-bottom: 0.7em;" class="rounded_box">
+            <div class="flex_space_between" style="color: grey;">
+                <textarea #insertStatement matInput [value]="generateInsertStatement()" spellcheck="false"
+                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"></textarea>
+                <div class="flex">
+                    <button mat-stroked-button [cdkCopyToClipboard]="insertStatement.value"
+                        (click)="openCopiedNotification()">
+                        Quick
+                        <mat-icon style="font-size: 20px; width:fit-content">file_copy</mat-icon>
+                    </button>
+                    <button mat-stroked-button (click)="addStatement(insertStatement)" style="margin-left: 0.5em;">
+                        Add Statement
+                    </button>
+                </div>
             </div>
-
         </div>
     </div>
+    <h4>Full Query</h4>
     <div class="flex_space_between" style="width: 80%;">
         <textarea style="margin-top: 0.7em;" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
             spellcheck="false" [value]="statements.join('\n')">
     </textarea>
-        <button mat-icon-button [cdkCopyToClipboard]="statements">
+        <button mat-icon-button [cdkCopyToClipboard]="statements.join('\n')" (click)="openCopiedNotification()">
             <mat-icon style="color: grey; font-size: 20px; width:fit-content">file_copy</mat-icon>
         </button>
     </div>

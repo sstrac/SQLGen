@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { TableDataService } from '../services/table-data.service'
 import { FormGroup, FormControl } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
     selector: 'generator',
@@ -28,8 +29,12 @@ export class GeneratorComponent {
         conditionValue: new FormControl()
     })
 
-    constructor(private tableData: TableDataService) {
+    constructor(private tableData: TableDataService, private snackBar: MatSnackBar) {
         this.tables = tableData.getTables()
+    }
+
+    openCopiedNotification(){
+        this.snackBar.open('Copied to Clipboard!', null, { duration: 2000 })
     }
 
     addStatement(statement){
@@ -121,13 +126,13 @@ export class GeneratorComponent {
         return style
     }
 
-    setSelectedStatementChoice(statementChoice) {
-        this.statementChoice = statementChoice
+    setSelectedStatementChoice(selection) {
+        this.statementChoice = selection.value
     }
 
 
-    setSelectedTable(tablename) {
-        this.table = this.tables.filter(table => table.name == tablename)[0]
+    setSelectedTable(selection) {
+        this.table = this.tables.filter(table => table.name == selection.value)[0]
         this.allFields = this.table.fields.map(field => field.fieldname)
         this.activeFields = this.table.fields.map(field => field.fieldname)
     }
