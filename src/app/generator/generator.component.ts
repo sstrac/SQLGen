@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { TableDataService } from '../services/table-data.service'
 import { FormGroup, FormControl } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { Table } from '../shared/table.interface'
 
 @Component({
     selector: 'generator',
@@ -11,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 export class GeneratorComponent {
     statements: string[] = []
     statementOptions = ['Select', 'Insert']
-    tables = []
+    tables: Table[] = []
     conditions: string[] = []
     activeConditions = []
 
@@ -30,7 +31,9 @@ export class GeneratorComponent {
     })
 
     constructor(private tableData: TableDataService, private snackBar: MatSnackBar) {
-        this.tables = tableData.getTables()
+        tableData.getTables().subscribe(tables => {
+            this.tables = tables
+        })
     }
 
     openCopiedNotification(){

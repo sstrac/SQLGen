@@ -1,28 +1,14 @@
 import { Injectable } from '@angular/core'
-import { LocalStorageService } from './local-storage.service';
-import * as TABLES from '../../assets/tables.json'
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tablesUrl } from '../shared/properties'
 
 @Injectable()
 export class TableDataService {
 
+    constructor(private http: HttpClient) { }
 
-    constructor(private localStorage: LocalStorageService) { }
-
-    getTables() {
-        let softStorage = this.localStorage.getStorage()
-        let hardStorage = TABLES.default.tables
-        if (softStorage !== undefined && hardStorage !== undefined) {
-            return hardStorage.concat(softStorage)
-        } else {
-            return hardStorage!==undefined ? hardStorage : softStorage 
-        }
+    getTables(): Observable<any> {
+        return this.http.get(tablesUrl)
     }
-}
-interface Table {
-    name: string
-    fields: Field[]
-}
-interface Field {
-    fieldname: string
-    type: string
 }

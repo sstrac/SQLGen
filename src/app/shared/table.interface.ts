@@ -1,16 +1,8 @@
 export interface Table {
     name: string
-    fields: any
-    fieldKeys: string[]
-    options: Option[]
+    fields: Field[]
 }
-export interface Option {
-    field: string
-    options: any[]
-}
-export interface Mapping {
-    sourceTableName: string
-    sourceTableKey: string
-    destTableName: string
-    destTableKey: string
+interface Field {
+    fieldname: string
+    type: string
 }
