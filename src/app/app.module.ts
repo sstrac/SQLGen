@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatSidenavModule, MatFormFieldModule, MatInputModule, MatToolbarModule, MatButtonModule, MatIconModule, MatAutocompleteModule, MatOptionModule, MatDividerModule, MatCardModule, MatSelectModule, MatCheckboxModule, MatTabsModule, MatChipsModule, MatBadgeModule } from '@angular/material'
 import { IsEmptyPipe } from './shared/isempty.pipe';
 import { GroupComponent } from './shared/group.component';
 import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
@@ -16,8 +14,20 @@ import { StorageServiceModule } from 'ngx-webstorage-service';
 import { LocalStorageService } from './services/local-storage.service';
 import { GeneratorComponent } from './generator/generator.component';
 import { TableDataService } from './services/table-data.service';
-import { PracticeComponent } from './practice.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatInputModule } from '@angular/material/input'
+import { MatSelectModule } from '@angular/material/select'
+import { MatCardModule } from '@angular/material/card'
+import { MatButtonModule } from '@angular/material/button'
+import { MatIconModule } from '@angular/material/icon'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatTabsModule } from '@angular/material/tabs'
+import { MatChipsModule } from '@angular/material/chips'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -27,8 +37,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     IsEmptyPipe,
     KeyValueArrPipe,
     NewTableComponent,
-    GeneratorComponent,
-    PracticeComponent
+    GeneratorComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +47,6 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatOptionModule,
     MatSelectModule,
     MatCardModule,
     MatButtonModule,
@@ -46,7 +54,8 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     MatCheckboxModule,
     MatTabsModule,
     MatChipsModule,
-    MatBadgeModule,
+    MatSnackBarModule,
+    ClipboardModule,
     TextFieldModule,
     StorageServiceModule,
     RouterModule.forRoot(routes)
