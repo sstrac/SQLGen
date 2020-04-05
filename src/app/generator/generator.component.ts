@@ -126,13 +126,13 @@ export class GeneratorComponent {
         return style
     }
 
-    setSelectedStatementChoice(selection) {
-        this.statementChoice = selection.value
+    setSelectedStatementChoice(eventValue) {
+        this.statementChoice = eventValue
     }
 
 
-    setSelectedTable(selection) {
-        this.table = this.tables.filter(table => table.name == selection.value)[0]
+    setSelectedTable(eventValue) {
+        this.table = this.tables.filter(table => table.name == eventValue)[0]
         this.allFields = this.table.fields.map(field => field.fieldname)
         this.activeFields = this.table.fields.map(field => field.fieldname)
     }

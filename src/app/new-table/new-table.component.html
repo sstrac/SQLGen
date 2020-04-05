@@ -28,7 +28,7 @@
                             <button mat-icon-button (click)="removeField(fields.indexOf(field))">
                                 <mat-icon class="mat_icon_remove">remove</mat-icon>
                             </button>
-                            <p>Field Name: {{field.fieldname}}, Field Type: {{field.type}}</p>
+                            <p><strong>Field Name </strong>{{field.fieldname}}<strong> Field Type </strong>{{field.type}}</p>
                         </div>
                     </form>
                     <button mat-button type=submit [disabled]="tableName.status==='INVALID'">Submit</button>

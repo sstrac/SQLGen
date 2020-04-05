@@ -1,20 +1,8 @@
 <group>
-    <mat-form-field>
-        <mat-label>Statement</mat-label>
-        <mat-select #selectedStatement (selectionChange)="setSelectedStatementChoice(selectedStatement)">
-            <mat-option *ngFor="let option of statementOptions" [value]="option">
-                {{option}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Table</mat-label>
-        <mat-select #selectedTable (selectionChange)="setSelectedTable(selectedTable)">
-            <mat-option *ngFor="let table of tables" [value]="table.name">
-                {{table.name}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <option-form-field [label]="'Statement'" [options]="statementOptions"
+    (selectionChange)="setSelectedStatementChoice($event)"></option-form-field>
+    <option-form-field [label]="'Table'" [options]="tables" [iterationMapping]="'name'"
+    (selectionChange)="setSelectedTable($event)"></option-form-field>
     <div *ngIf="statementChoice==='Select' && table">
         <form [formGroup]="conditionForm" (ngSubmit)="addCondition()">
             <mat-form-field>

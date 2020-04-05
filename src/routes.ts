@@ -4,6 +4,6 @@ import { Routes } from '@angular/router';
 import { GeneratorComponent } from './app/generator/generator.component';
 
 export const routes: Routes = [
-    { path: 'generator', component: GeneratorComponent },
-    { path: 'newtable', component: NewTableComponent }
+    { path: 'generator', loadChildren: () => import('./app/generator/generator.module').then(m => m.GeneratorModule) },
+    { path: 'newtable', loadChildren: () => import('./app/new-table/new-table.module').then(m => m.NewTableModule) }
 ]
