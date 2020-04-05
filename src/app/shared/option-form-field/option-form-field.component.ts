@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, SimpleChanges, EventEmitter } from '@
 })
 export class OptionFormFieldComponent implements OnInit {
 
-  @Input() label: string
+  @Input() label?: string
   @Input() options: string[]
   @Input() iterationMapping?
   @Output() selectionChange? = new EventEmitter()
