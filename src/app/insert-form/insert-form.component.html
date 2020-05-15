@@ -1,0 +1,9 @@
+<group class="flex">
+    <div *ngFor="let table of tables">
+        <p>{{table.name}}</p>
+        <mat-form-field *ngFor="let field of table.fields">
+            <mat-label>{{field.fieldname}}</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+</group>

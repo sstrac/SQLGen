@@ -11,6 +11,9 @@ import { NewTableModule } from './new-table/new-table.module';
 import { GeneratorModule } from './generator/generator.module';
 import { MatTabsModule } from '@angular/material/tabs'
 import { SQLGenReuseStrategy } from './shared/sqlgen-route-reuse-strategy';
+import { ManageTablesModule } from './manage-tables/manage-tables.module';
+import { OptionFormFieldComponent } from './shared/option-form-field/option-form-field.component';
+import { MapPipe } from './shared/map.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { SQLGenReuseStrategy } from './shared/sqlgen-route-reuse-strategy';
     MatTabsModule,
     NewTableModule,
     GeneratorModule,
+    ManageTablesModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],

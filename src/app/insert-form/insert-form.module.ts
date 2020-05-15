@@ -1,0 +1,24 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { InsertFormComponent } from './insert-form.component';
+import { SharedModule } from '../shared/shared.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+const routes: Routes = [
+  { path: '', component: InsertFormComponent }
+]
+
+@NgModule({
+  declarations: [InsertFormComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    MatInputModule,
+    MatFormFieldModule,
+    RouterModule.forChild(routes)
+  ],
+  exports: [InsertFormComponent]
+})
+export class InsertFormModule { }

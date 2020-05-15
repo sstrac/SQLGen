@@ -7,16 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { BrowserModule } from '@angular/platform-browser';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { FilterPipe } from '../shared/filter.pipe';
-import { OptionFormFieldComponent } from '../shared/option-form-field/option-form-field.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [
   { path: '', component: GeneratorComponent}
@@ -24,9 +21,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-      GeneratorComponent,
-      OptionFormFieldComponent,
-      FilterPipe
+      GeneratorComponent
     ],
     imports: [
       CommonModule,
