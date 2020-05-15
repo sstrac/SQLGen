@@ -1,9 +1,18 @@
 <group class="flex">
-    <div *ngFor="let table of tables">
-        <p>{{table.name}}</p>
-        <mat-form-field *ngFor="let field of table.fields">
-            <mat-label>{{field.fieldname}}</mat-label>
-            <input matInput>
-        </mat-form-field>
+    <form [formGroup]="formGroup" (ngSubmit)="submit()">
+        <div *ngFor="let table of tables">
+            <p>{{table.name}}</p>
+            <mat-form-field *ngFor="let field of table.fields">
+                <mat-label>{{field.fieldname}}</mat-label>
+                <input matInput formControlName="{{field.fieldname}}">
+            </mat-form-field>
+            <button mat-stroked-button type=submit style="margin-left: 0.5em;">
+                Submit
+            </button>
+        </div>
+    </form>
+    <div>
+        <textarea #insertStatement matInput [value]="statements" spellcheck="false" cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"></textarea>
     </div>
 </group>

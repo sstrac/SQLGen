@@ -5,6 +5,8 @@ import { InsertFormComponent } from './insert-form.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: InsertFormComponent }
@@ -15,8 +17,11 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSidenavModule,
     RouterModule.forChild(routes)
   ],
   exports: [InsertFormComponent]

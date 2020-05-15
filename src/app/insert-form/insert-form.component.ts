@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableDataService } from '../services/table-data.service';
 import { log } from '../generator/generator.component'
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-insert-form',
@@ -9,15 +10,26 @@ import { log } from '../generator/generator.component'
 })
 export class InsertFormComponent implements OnInit {
   tables = []
+  statements
+  formGroup: FormGroup
 
   constructor(private tableData: TableDataService) {
-    this.tables = tableData.getTables()
+  }
+  
+  submit(){
+    log(this.formGroup)
   }
 
   ngOnInit(): void {
-    //array of tables, structure is
-    //name: string, fields: []
-    //fields structure is { fieldname, type }
+    this.tables = this.tableData.getTables()
+
+    let group={}    
+    this.tables.forEach(table=>{
+      table.fields.forEach(field=>{
+        group[field.fieldname]=new FormControl('');  
+      })
+    })
+    this.formGroup = new FormGroup(group);
   }
 
 }
