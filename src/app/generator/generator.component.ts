@@ -94,7 +94,6 @@ export class GeneratorComponent {
     }
 
     generateInsertStatement(){
-        let joiningWord = this.activeConditions[0] === undefined ? " WHERE " : " AND "
         let allFields = this.allFields.toString()
         return "INSERT INTO ".concat(this.table.name + " (")
         .concat(allFields + ") VALUES ('") + 
@@ -163,6 +162,17 @@ export function toggleElementInArray(element, array){
 export function buffStringWithSeperator(string: string, delimiter: string, sep: string): string{
     let out = ''
     const stringArr: string[] = string.split(delimiter)
+    stringArr.forEach( x => {
+        if(stringArr.indexOf(x) !== stringArr.length-1){
+            out += x + sep
+        } else {
+            out += x
+        }
+    })
+    return out
+}
+export function buffArrayWithSeperator(stringArr: string[], sep: string): string{
+    let out = ''
     stringArr.forEach( x => {
         if(stringArr.indexOf(x) !== stringArr.length-1){
             out += x + sep
