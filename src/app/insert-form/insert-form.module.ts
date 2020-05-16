@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   { path: '', component: InsertFormComponent }
@@ -24,6 +25,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatSidenavModule,
     MatButtonModule,
+    MatIconModule,
     RouterModule.forChild(routes)
   ],
   exports: [InsertFormComponent]

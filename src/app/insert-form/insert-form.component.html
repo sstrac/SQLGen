@@ -1,22 +1,27 @@
 <group class="flex">
+    <button mat-icon-button (click)="clearStatements()">
+        <mat-icon color="primary">delete</mat-icon>
+    </button>
+    <button mat-icon-button (click)="autoFill()">
+        <mat-icon color="primary">autorenew</mat-icon>
+    </button>
     <form [formGroup]="formGroup" (ngSubmit)="submit()">
         <div *ngFor="let table of tables">
             <p>{{table.name}}</p>
             <mat-form-field *ngFor="let field of table.fields">
                 <mat-label>{{field.fieldname}}</mat-label>
                 <input matInput formControlName="{{field.formControlName}}"
-                [(ngModel)]="formGroup[table_relations[field.formControlName]]!=undefined ? formGroup[table_relations[field.formControlName]] : formGroup[field.formControlName]">
-             </mat-form-field>
+                    [(ngModel)]="formGroup[table_relations[field.formControlName]]!=undefined ? formGroup[table_relations[field.formControlName]] : formGroup[field.formControlName]">
+            </mat-form-field>
         </div>
-        <button mat-stroked-button type=submit style="margin-left: 0.5em;">
-            Submit
-        </button>
+        <div>
+            <button mat-stroked-button type=submit style="margin-left: 0.5em;">
+                Submit
+            </button>
+        </div>
     </form>
     <div>
         <textarea #insertStatement matInput [value]="statements" spellcheck="false" cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"></textarea>
-        <button mat-stroked-button (click)="clearStatements()" style="margin-left: 0.5em;">
-            Clear
-        </button>
     </div>
 </group>

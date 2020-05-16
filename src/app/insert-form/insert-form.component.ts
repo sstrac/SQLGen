@@ -3,6 +3,7 @@ import { TableDataService } from '../services/table-data.service';
 import { log, buffArrayWithSeperator } from '../generator/generator.component'
 import { FormGroup, FormControl } from '@angular/forms';
 import * as TABLE_RELATIONS from '../../assets/table_relations.json'
+import { UUID } from 'angular2-uuid'
 
 @Component({
   selector: 'app-insert-form',
@@ -17,6 +18,20 @@ export class InsertFormComponent implements OnInit {
   statementConfig = {}
 
   constructor(private tableData: TableDataService) {
+  }
+
+  autoFill() {
+    this.tables.forEach(table => {
+      let indexOfTable = this.tables.indexOf(table)
+      table.fields.forEach(field => {
+        let indexOfField = this.tables[indexOfTable].fields.indexOf(field)
+        let autogen_type = this.tables[indexOfTable].fields[indexOfField].autogen_type
+        if (autogen_type != undefined) {
+          if (autogen_type == 'uuid')
+            this.formGroup[field.formControlName] = this.genUUID()
+        }
+      })
+    })
   }
 
   submit() {
@@ -39,6 +54,10 @@ export class InsertFormComponent implements OnInit {
       })
     })
     this.formGroup = new FormGroup(group);
+  }
+
+  genUUID() {
+    return UUID.UUID().replace(/-/gi, "")
   }
 
   generateInsertStatement() {

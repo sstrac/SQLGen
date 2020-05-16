@@ -3,7 +3,7 @@
         {
             "name": "Books",
             "fields": [
-                { "fieldname": "shelf_id", "type": "string"},
+                { "fieldname": "shelf_id", "type": "string", "autogen_type": "uuid" },
                 { "fieldname": "pages", "type": "number" },
                 { "fieldname": "title", "type": "string" },
                 { "fieldname": "cover_color", "type": "string" },
@@ -15,7 +15,7 @@
         {
             "name": "Shelves",
             "fields": [
-                { "fieldname": "id", "type": "number" },
+                { "fieldname": "id", "type": "number" , "autogen_type": "uuid" },
                 { "fieldname": "location", "type": "string" }
             ]
         }
