@@ -1,11 +1,14 @@
 <group class="flex">
-    <button mat-icon-button (click)="clearStatements()">
+    <button matTooltip="clear fields" mat-icon-button (click)="clear(insertForm)">
+        <mat-icon color="primary">clear</mat-icon>
+    </button>
+    <button matTooltip="delete statements" mat-icon-button (click)="clearStatements()">
         <mat-icon color="primary">delete</mat-icon>
     </button>
-    <button mat-icon-button (click)="autoFill()">
+    <button matTooltip="autofill fields" mat-icon-button (click)="autoFill()">
         <mat-icon color="primary">autorenew</mat-icon>
     </button>
-    <form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <form #insertForm [formGroup]="formGroup" (ngSubmit)="submit()">
         <div *ngFor="let table of tables">
             <p>{{table.name}}</p>
             <mat-form-field *ngFor="let field of table.fields">

@@ -20,6 +20,11 @@ export class InsertFormComponent implements OnInit {
   constructor(private tableData: TableDataService) {
   }
 
+  clear(form){
+    this.formGroup.reset()
+    form.reset()
+  }
+
   autoFill() {
     this.tables.forEach(table => {
       let indexOfTable = this.tables.indexOf(table)

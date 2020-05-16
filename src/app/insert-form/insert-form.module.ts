@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const routes: Routes = [
   { path: '', component: InsertFormComponent }
@@ -26,6 +27,7 @@ const routes: Routes = [
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
     RouterModule.forChild(routes)
   ],
   exports: [InsertFormComponent]
