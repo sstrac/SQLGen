@@ -4,9 +4,9 @@
             <p>{{table.name}}</p>
             <mat-form-field *ngFor="let field of table.fields">
                 <mat-label>{{field.fieldname}}</mat-label>
-                <input matInput formControlName="{{table.name}}_{{field.fieldname}}">
-                <!-- Not working cuz string, should be a variable -->
-            </mat-form-field>
+                <input matInput formControlName="{{field.formControlName}}"
+                [(ngModel)]="formGroup[table_relations[field.formControlName]]!=undefined ? formGroup[table_relations[field.formControlName]] : formGroup[field.formControlName]">
+             </mat-form-field>
         </div>
         <button mat-stroked-button type=submit style="margin-left: 0.5em;">
             Submit

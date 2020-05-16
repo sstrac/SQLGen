@@ -1,8 +1,3 @@
 {
-    "mappings": [
-        {
-            "link1": "two",
-            "link2": "one"
-        }
-    ]
+    "Books_shelf_id": "Shelves_id"
 }

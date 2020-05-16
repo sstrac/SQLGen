@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableDataService } from '../services/table-data.service';
-import { log, buffStringWithSeperator, buffArrayWithSeperator } from '../generator/generator.component'
+import { log, buffArrayWithSeperator } from '../generator/generator.component'
 import { FormGroup, FormControl } from '@angular/forms';
 import * as TABLE_RELATIONS from '../../assets/table_relations.json'
 
@@ -11,6 +11,7 @@ import * as TABLE_RELATIONS from '../../assets/table_relations.json'
 })
 export class InsertFormComponent implements OnInit {
   tables = []
+  table_relations = TABLE_RELATIONS.default
   statements = ''
   formGroup: FormGroup
   statementConfig = {}
@@ -27,43 +28,34 @@ export class InsertFormComponent implements OnInit {
 
     let group = {}
     this.tables.forEach(table => {
+      let indexOfTable = this.tables.indexOf(table)
       table.fields.forEach(field => {
-        group[table.name + '_' + field.fieldname] = new FormControl('');
+        let indexOfField = this.tables[indexOfTable].fields.indexOf(field)
+        //create form control name e.g. PROFILE_id
+        let formControlName = table.name + '_' + field.fieldname
+        //apply formControlName to existing tables
+        this.tables[indexOfTable].fields[indexOfField].formControlName = formControlName
+        group[formControlName] = new FormControl('');
       })
     })
     this.formGroup = new FormGroup(group);
   }
 
   generateInsertStatement() {
-    //set statementConfig like json
-    /**
-     * {
-     *  name: Books
-     * fields: 
-     *  { field: value, field: value }
-     * }
-     */
     this.tables.forEach(table => {
-      let formFieldValues : string[] = []
+      let formFieldValues: string[] = []
       let formFieldNames = Object.keys(this.formGroup.value).filter(value => value.includes(table.name + '_'))
       formFieldNames.forEach(fieldname => formFieldValues.push(this.formGroup.value[fieldname]))
-      let fieldNames = formFieldNames.map( fieldname =>fieldname.replace(table.name + '_', '' ))
+      let fieldNames = formFieldNames.map(fieldname => fieldname.replace(table.name + '_', ''))
       this.statements += "INSERT INTO ".concat(table.name + " (")
-      .concat(buffArrayWithSeperator(fieldNames, ","))
-      .concat(") VALUES ('")
-      .concat(buffArrayWithSeperator(formFieldValues, "','"))
-      .concat("');\n")
+        .concat(buffArrayWithSeperator(fieldNames, ","))
+        .concat(") VALUES ('")
+        .concat(buffArrayWithSeperator(formFieldValues, "','"))
+        .concat("');\n")
     })
   }
-  
-  clearStatements(){
+
+  clearStatements() {
     this.statements = ''
   }
-
-  getRelatedField(formFieldName): FormControl{
-    let link1s = TABLE_RELATIONS.default.mappings.filter( relation => relation.link1 )
-    let location = link1s.indexOf(formFieldName)
-    return this.formGroup[TABLE_RELATIONS.default.mappings[location].link2]
-  }
-
 }

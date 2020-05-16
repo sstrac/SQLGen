@@ -3,6 +3,7 @@
         {
             "name": "Books",
             "fields": [
+                { "fieldname": "shelf_id", "type": "string"},
                 { "fieldname": "pages", "type": "number" },
                 { "fieldname": "title", "type": "string" },
                 { "fieldname": "cover_color", "type": "string" },
@@ -14,7 +15,7 @@
         {
             "name": "Shelves",
             "fields": [
-                { "fieldname": "number", "type": "number" },
+                { "fieldname": "id", "type": "number" },
                 { "fieldname": "location", "type": "string" }
             ]
         }
