@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableDataService } from '../services/table-data.service';
 import { log, buffStringWithSeperator, buffArrayWithSeperator } from '../generator/generator.component'
 import { FormGroup, FormControl } from '@angular/forms';
+import * as TABLE_RELATIONS from '../../assets/table_relations.json'
 
 @Component({
   selector: 'app-insert-form',
@@ -12,6 +13,7 @@ export class InsertFormComponent implements OnInit {
   tables = []
   statements = ''
   formGroup: FormGroup
+  statementConfig = {}
 
   constructor(private tableData: TableDataService) {
   }
@@ -33,6 +35,14 @@ export class InsertFormComponent implements OnInit {
   }
 
   generateInsertStatement() {
+    //set statementConfig like json
+    /**
+     * {
+     *  name: Books
+     * fields: 
+     *  { field: value, field: value }
+     * }
+     */
     this.tables.forEach(table => {
       let formFieldValues : string[] = []
       let formFieldNames = Object.keys(this.formGroup.value).filter(value => value.includes(table.name + '_'))
@@ -44,6 +54,16 @@ export class InsertFormComponent implements OnInit {
       .concat(buffArrayWithSeperator(formFieldValues, "','"))
       .concat("');\n")
     })
+  }
+  
+  clearStatements(){
+    this.statements = ''
+  }
+
+  getRelatedField(formFieldName): FormControl{
+    let link1s = TABLE_RELATIONS.default.mappings.filter( relation => relation.link1 )
+    let location = link1s.indexOf(formFieldName)
+    return this.formGroup[TABLE_RELATIONS.default.mappings[location].link2]
   }
 
 }

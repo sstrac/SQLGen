@@ -5,6 +5,7 @@
             <mat-form-field *ngFor="let field of table.fields">
                 <mat-label>{{field.fieldname}}</mat-label>
                 <input matInput formControlName="{{table.name}}_{{field.fieldname}}">
+                <!-- Not working cuz string, should be a variable -->
             </mat-form-field>
         </div>
         <button mat-stroked-button type=submit style="margin-left: 0.5em;">
@@ -14,5 +15,8 @@
     <div>
         <textarea #insertStatement matInput [value]="statements" spellcheck="false" cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"></textarea>
+        <button mat-stroked-button (click)="clearStatements()" style="margin-left: 0.5em;">
+            Clear
+        </button>
     </div>
 </group>
