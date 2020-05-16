@@ -6,7 +6,11 @@
                 { "fieldname": "shelf_id", "type": "string", "autogen_type": "uuid" },
                 { "fieldname": "pages", "type": "number" },
                 { "fieldname": "title", "type": "string" },
-                { "fieldname": "cover_color", "type": "string" },
+                { "fieldname": "cover_color", "type": "string", 
+                    "options": [
+                        "Blue", "Red", "Yellow", "Green"
+                    ]
+                },
                 { "fieldname": "pen", "type": "number" },
                 { "fieldname": "blurb", "type": "string" },
                 { "fieldname": "author", "type": "string" }

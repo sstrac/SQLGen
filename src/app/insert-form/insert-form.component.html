@@ -13,8 +13,13 @@
             <p>{{table.name}}</p>
             <mat-form-field *ngFor="let field of table.fields">
                 <mat-label>{{field.fieldname}}</mat-label>
-                <input matInput formControlName="{{field.formControlName}}"
+                <input *ngIf="field.options == undefined" matInput formControlName="{{field.formControlName}}"
                     [(ngModel)]="formGroup[table_relations[field.formControlName]]!=undefined ? formGroup[table_relations[field.formControlName]] : formGroup[field.formControlName]">
+                <mat-select *ngIf="field.options != undefined" formControlName="{{field.formControlName}}">
+                    <mat-option *ngFor="let option of field.options" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
         <div>
