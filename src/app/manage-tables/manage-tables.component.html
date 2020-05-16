@@ -1,0 +1,6 @@
+<group>
+    <option-form-field [label]="'Choose Table'" [options]="tables" [iterationMapping]="'name'"
+    (selectionChange)="setSelectedTable($event)"></option-form-field>
+    <p></p>
+    <button mat-button (click)="deleteTable(selectedTable)">Delete Table</button>
+</group>

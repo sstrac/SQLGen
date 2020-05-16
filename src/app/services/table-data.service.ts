@@ -17,6 +17,10 @@ export class TableDataService {
             return hardStorage!==undefined ? hardStorage : softStorage 
         }
     }
+
+    deleteTable(table){
+            return this.localStorage.removeFromStorage(table.name)
+    }
 }
 interface Table {
     name: string
