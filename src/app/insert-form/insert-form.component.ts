@@ -66,6 +66,8 @@ export class InsertFormComponent implements OnInit {
   }
 
   generateInsertStatement() {
+    this.statements += "/* ========== " + this.formGroup['PROFILE_name'].toUpperCase() + " - "
+     + this.formGroup['PROFILE_type'].toUpperCase() + " ========== */" + "\n\n"
     this.tables.forEach(table => {
       let formFieldValues: string[] = []
       let formFieldNames = Object.keys(this.formGroup.value).filter(value => value.includes(table.name + '_'))
