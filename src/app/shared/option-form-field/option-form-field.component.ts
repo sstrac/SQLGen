@@ -9,8 +9,6 @@ export class OptionFormFieldComponent implements OnInit {
 
   @Input() label?: string
   @Input() options: string[]
-  @Input() iterationMapping?
-  @Output() selectionChange? = new EventEmitter()
 
   constructor() { }
 
@@ -20,10 +18,6 @@ export class OptionFormFieldComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges){
     // let currLabel = changes.label.currentValue
     // let prevLabel = changes.label.previousValue
-  }
-
-  onSelectionChange(domElement){
-    this.selectionChange.emit(domElement.value)
   }
 
 }

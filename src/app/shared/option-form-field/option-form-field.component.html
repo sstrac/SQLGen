@@ -1,7 +1,7 @@
 <mat-form-field>
     <mat-label>{{label}}</mat-label>
-    <mat-select #select (selectionChange)="onSelectionChange(select)">
-        <mat-option *ngFor="let option of options | map:iterationMapping" [value]="option">
+    <mat-select>
+        <mat-option *ngFor="let option of options" [value]="option">
             {{option}}
         </mat-option>
     </mat-select>
