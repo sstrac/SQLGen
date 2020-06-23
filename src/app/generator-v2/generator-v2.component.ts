@@ -15,6 +15,8 @@ export class GeneratorV2Component implements OnInit{
   currentStatementType: string
   tables: Table[] = []
   currentTable: Table
+  currentFields: string[] //Object reference to currentTable object
+  allFields: string[] = [] //copy of currentTable fields
 
   fullStatement: string
   miniStatement: string
@@ -29,15 +31,27 @@ export class GeneratorV2Component implements OnInit{
     })
   }
 
-  readyUp(){
-    if(this.tableIsSet() && this.statementTypeIsSet()){
-      this.setBaseMiniSelectStatement()
+  readyUpSelect(){
+    if(this.tableIsSet && this.statementTypeIsSet('SELECT')){
+      this.setAllFields()
+      this.fullStatement = ""
+      this.miniStatement = "SELECT * FROM " + this.currentTable.tableName
     }
   }
 
-  setBaseMiniSelectStatement() {
-    this.miniStatement = "SELECT * FROM " + this.currentTable.tableName
+  updateSelect(){
+    let fields: string = this.allFields.length == this.currentFields.length ? '*' : this.currentFields.join(", ")
+    this.miniStatement = "SELECT " + 
+    fields + " FROM " +
+    this.currentTable.tableName + ";"
   }
+
+  readyUpInsert(){}
+
+  updateInsert(){}
+
+  tableIsSet = () => this.currentTable !== undefined
+  statementTypeIsSet = (statementType: string) => this.currentStatementType == statementType
 
   addMiniToFull() {
     if (this.miniStatement != "") {
@@ -47,32 +61,39 @@ export class GeneratorV2Component implements OnInit{
 
   setTable(tablename) {
     this.currentTable = this.getTableByName(tablename)
-    this.readyUp()
-  }
-
-  tableIsSet = (): boolean => {
-    return this.currentTable !== undefined
+    this.currentFields = this.getFieldNames(this.currentTable)
+    /*TODO: consider using switch as not to call both functions*/
+    this.readyUpSelect()
+    this.readyUpInsert()
   }
 
   setStatementType(statementType) {
     this.currentStatementType = statementType
-    this.readyUp()
+    this.readyUpSelect()
+    this.readyUpInsert()
   }
 
-  statementTypeIsSet = () => {
-    return this.currentStatementType !== undefined
+  setAllFields(){
+    Object.assign(this.allFields, this.currentFields)
   }
 
-  getTableNames = () => {
-    return this.tables.map(table => table.tableName)
+  getTableNames = () => this.tables.map(table => table.tableName)
+
+  getTableByName = (tablename: string): Table => this.tables.filter(table => table.tableName == tablename)[0]
+
+  getFieldNames = (table: Table): string[] => table.tableFields
+
+  //-- Field Chips Logic --//
+  dropField = (field: string) => { 
+    return this.currentFields.splice(this.currentFields.indexOf(field), 1) 
+  }
+  addField = (field: string) => this.currentFields.push(field)
+
+  toggleFields(field: string){
+    this.currentFields.includes(field) ? this.dropField(field): this.addField(field)
+    this.updateSelect()
   }
 
-  getTableByName = (tablename: string): Table => {
-    return this.tables.filter(table => table.tableName == tablename)[0]
-  }
-
-  getFieldNames = (table: Table): string[] => {
-    return table.tableFields
-  }
+  toggleChipStyle = (field) => this.currentFields.includes(field) ? 'pink' : 'lightgrey'
 
 }

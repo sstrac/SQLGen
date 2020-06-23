@@ -11,6 +11,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { OptionFormFieldModule } from '../shared/option-form-field/option-form-field.module';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InsertFormModule } from '../shared/insert-form/insert-form.module';
 
 const routes: Routes = [
   { path: '', component: GeneratorV2Component}
@@ -25,6 +26,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     OptionFormFieldModule,
+    InsertFormModule,
     TextFieldModule,
     MatInputModule,
     MatButtonModule,

@@ -14,6 +14,9 @@ body { font-family: Roboto, "Helvetica Neue Light" , "Helvetica Neue", "Helvetic
 .spacing{
     margin: 1em;
 }
+.small_spacing{
+    margin: 0.5em;
+}
 .align_center{
     align-items: center;
 }
@@ -64,4 +67,7 @@ mat-icon{
     color: rgb(255, 74, 119);
     border-radius: 50%;
     font-size: 20px;
+}
+mat-form-field{
+    margin: unset;
 }

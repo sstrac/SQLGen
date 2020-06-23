@@ -13,7 +13,7 @@
                 </option-form-field>
             </div>
         </div>
-        <div>
+        <div *ngIf="tableIsSet()">
             <p style="font-size: 10px; color: grey">Form your statement here and add to the Full Statement</p>
             <div class="flex_row align_top">
                 <!--Mini Statement-->
@@ -24,17 +24,18 @@
                     <mat-icon class="mat_icon_circle_button_primary">add</mat-icon>
                 </button>
             </div>
-            <div class="flex_row align_center">
+            <div class="flex_row align_center small_spacing">
                 <!--Field/Condition Chips-->
-                <mat-chip-list *ngIf="tableIsSet()">
-                    <mat-chip *ngFor="let field of getFieldNames(currentTable)">{{field}}</mat-chip>
+                <mat-chip-list>
+                    <mat-chip #chip *ngFor="let field of allFields" (click)="toggleFields(field)"
+                    [ngStyle]="{'background-color': toggleChipStyle(field)}">{{field}}</mat-chip>
                 </mat-chip-list>
             </div>
         </div>
         <div class="flex_row align_center space_between" *ngIf="tableIsSet()">
             <!--Add Conditions-->
             <p>Add Condition</p>
-            <option-form-field [label]="'Field'" [options]="getFieldNames(currentTable)"></option-form-field>
+            <option-form-field [label]="'Field'" [options]="allFields"></option-form-field>
             <option-form-field [options]="['=','IN']" [width]="'3em'"></option-form-field>
             <mat-form-field>
                 <mat-label>Value</mat-label>

@@ -1,0 +1,15 @@
+<form #insertForm [formGroup]="formGroup" (ngSubmit)="submit()" *ngIf="tablesAreSet">
+    <div *ngFor="let table of tables">
+        <p>{{table.name}}</p>
+        <mat-form-field *ngFor="let field of table.tableFields">
+            <mat-label>{{field.fieldname}}</mat-label>
+            <input matInput formControlName="{{field.formControlName}}"
+                [(ngModel)]="formGroup[tableRelations[field.formControlName]]!=undefined ? formGroup[tableRelations[field.formControlName]] : formGroup[field.formControlName]">
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-stroked-button type=submit style="margin-left: 0.5em;">
+            Submit
+        </button>
+    </div>
+</form>
