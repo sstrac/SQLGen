@@ -2,22 +2,43 @@
 
 html, body { height: 100%; margin: 0;}
 body { font-family: Roboto, "Helvetica Neue Light" , "Helvetica Neue", "Helvetica,Arial", "Lucida Grande", sans-serif; }
-.flex{
+.width_100{
+    width: 100%;
+}
+.width_50{
+    width: 50%;
+}
+.border{
+    border: thin
+}
+.spacing{
+    margin: 1em;
+}
+.align_center{
+    align-items: center;
+}
+.align_top{
+    align-items: flex-start;
+}
+.align_bottom{
+    align-items: flex-end;
+}
+.space_between{
+    justify-content: space-between;
+}
+.space_around{
+    justify-content: space-around;
+}
+.space_evenly{
+    justify-content: space-evenly;
+}
+.flex_row{
     display: flex;
     flex-direction: row;
-    align-items: center;
 }
 .flex_column{
     display: flex;
     flex-direction: column;
-}
-.flex_space_between{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-mat-icon{
-    border-radius: 50%;
 }
 .rounded_box{
     border-radius: 3%;
@@ -29,6 +50,18 @@ mat-icon{
     box-shadow: 1px 2px 4px rgb(209, 209, 209);
     padding: 1em;
 }
-mat-form-field{
-    margin-right: 0.5em;
+mat-icon{
+    border-radius: 50%;
+}
+.mat_icon_circle_button_primary{
+    background-color: rgb(255, 74, 119);
+    color: white;
+    border-radius: 50%;
+    font-size: 15px;
+}
+.mat_icon_circle_button_secondary{
+    background-color: white;
+    color: rgb(255, 74, 119);
+    border-radius: 50%;
+    font-size: 20px;
 }

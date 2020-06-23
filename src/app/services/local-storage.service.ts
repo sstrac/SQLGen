@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-import { log } from '../generator/generator.component';
 // key that is used to access the data in local storage
 
 const STORAGE_KEY = 'tables';

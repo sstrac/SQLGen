@@ -1,26 +1,146 @@
 {
     "tables": [
         {
-            "name": "Books",
+            "name": "USER_ACCOUNT",
             "fields": [
-                { "fieldname": "shelf_id", "type": "string", "autogen_type": "uuid" },
-                { "fieldname": "pages", "type": "number" },
-                { "fieldname": "title", "type": "string" },
-                { "fieldname": "cover_color", "type": "string", 
-                    "options": [
-                        "Blue", "Red", "Yellow", "Green"
-                    ]
-                },
-                { "fieldname": "pen", "type": "number" },
-                { "fieldname": "blurb", "type": "string" },
-                { "fieldname": "author", "type": "string" }
+                { "fieldname": "id", "type": "number" },
+                { "fieldname": "account_enabled", "type": "number" },
+                { "fieldname": "account_locked", "type": "number" },
+                { "fieldname": "auth_provider", "type": "number" },
+                { "fieldname": "credentials_expired", "type": "number" },
+                { "fieldname": "email", "type": "string" },
+                { "fieldname": "language", "type": "number" },
+                { "fieldname": "password", "type": "number" },
+                { "fieldname": "social_id", "type": "number" },
+                { "fieldname": "version", "type": "number" },
+                { "fieldname": "test_user", "type": "number" },
+                { "fieldname": "registration_date", "type": "number" },
+                { "fieldname": "registration_ip", "type": "number" }
+
             ]
         },
         {
-            "name": "Shelves",
+            "name": "ACCOUNT_ROLES",
             "fields": [
-                { "fieldname": "id", "type": "number" , "autogen_type": "uuid" },
-                { "fieldname": "location", "type": "string" }
+                { "fieldname": "account_id", "type": "number" },
+                { "fieldname": "role_id", "type": "number" }
+            ]
+        },
+        {
+            "name": "ACCOUNT_SETTINGS",
+            "fields": [
+                { "fieldname": "account_id", "type": "number" },
+                { "fieldname": "notifications_enabled", "type": "number" }
+            ]
+        },
+        {
+            "name": "PROFILE",
+            "fields": [
+                { "fieldname": "id", "type": "number" },
+                { "fieldname": "description", "type": "string" },
+                { "fieldname": "image_url", "type": "string" },
+                { "fieldname": "name", "type": "string" },
+                { "fieldname": "version", "type": "string" },
+                { "fieldname": "type", "type": "string" },
+                { "fieldname": "email", "type": "string" },
+                { "fieldname": "job_title", "type": "string" },
+                { "fieldname": "rating", "type": "string" },
+                { "fieldname": "web_url", "type": "string" },
+                { "fieldname": "account_id", "type": "string" },
+                { "fieldname": "creation_date", "type": "string" }
+            ]
+        },
+        {
+            "name": "MUSICIAN_PROFILE",
+            "fields": [
+                { "fieldname": "id", "type": "number" }
+            ]
+        },
+        {
+            "name": "PROFILE_LOCATION",
+            "fields": [
+                { "fieldname": "id", "type": "number" },
+                { "fieldname": "address", "type": "number" },
+                { "fieldname": "city", "type": "number" },
+                { "fieldname": "latitude", "type": "number" },
+                { "fieldname": "longitude", "type": "number" },
+                { "fieldname": "latitude_delta", "type": "number" },
+                { "fieldname": "longitude_delta", "type": "number" },
+                { "fieldname": "profile_id", "type": "number" },
+                { "fieldname": "selected", "type": "number" }
+            ]
+        },
+        {
+            "name": "PROFILE_INSTRUMENT",
+            "fields": [
+                { "fieldname": "level", "type": "number" },
+                { "fieldname": "teachable", "type": "number" },
+                { "fieldname": "instrument_id", "type": "number" },
+                { "fieldname": "profile_id", "type": "number" }
+            ]
+        },
+        {
+            "name": "PROFILE_GENRE",
+            "fields": [
+                { "fieldname": "genre_id", "type": "number" },
+                { "fieldname": "profile_id", "type": "number" }
+            ]
+        },
+        {
+            "name": "SOCIAL_MEDIA_ITEM",
+            "fields": [
+                { "fieldname": "id", "type": "number" },
+                { "fieldname": "name", "type": "number" },
+                { "fieldname": "media_type", "type": "number" },
+                { "fieldname": "profile_id", "type": "number" },
+                { "fieldname": "social_access_token", "type": "number" },
+                { "fieldname": "social_id", "type": "number" },
+                { "fieldname": "auth", "type": "number" },
+                { "fieldname": "enabled", "type": "number" }
+            ]
+        },
+        {
+            "name": "EDUCATION_EXPERIENCE",
+            "fields": [
+                { "fieldname": "id", "type": "number" },
+                { "fieldname": "date_end", "type": "number" },
+                { "fieldname": "date_start", "type": "number" },
+                { "fieldname": "school_name", "type": "number" },
+                { "fieldname": "title", "type": "number" },
+                { "fieldname": "profile_id", "type": "number" }
+            ]
+        },
+        {
+            "name": "PROFESSIONAL_EXPERIENCE",
+            "fields": [
+                { "fieldname": "id", "type": "number" },
+                { "fieldname": "company_name", "type": "number" },
+                { "fieldname": "date_end", "type": "number" },
+                { "fieldname": "date_start", "type": "number" },
+                { "fieldname": "title", "type": "number" },
+                { "fieldname": "profile_id", "type": "number" }
+            ]
+        },
+        {
+            "name": "PROJECT_EXPERIENCE",
+            "fields": [
+                { "fieldname": "id", "type": "number" },
+                { "fieldname": "organization_name", "type": "number" },
+                { "fieldname": "date_end", "type": "number" },
+                { "fieldname": "date_start", "type": "number" },
+                { "fieldname": "title", "type": "number" },
+                { "fieldname": "profile_id", "type": "number" }
+            ]
+        },
+        {
+            "name": "AWARD_EXPERIENCE",
+            "fields": [
+                { "fieldname": "id", "type": "number" },
+                { "fieldname": "organization_name", "type": "number" },
+                { "fieldname": "date_end", "type": "number" },
+                { "fieldname": "date_start", "type": "number" },
+                { "fieldname": "title", "type": "number" },
+                { "fieldname": "profile_id", "type": "number" }
             ]
         }
     ]

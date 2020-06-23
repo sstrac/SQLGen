@@ -1,0 +1,66 @@
+<div class="flex_row align_top space_around spacing">
+    <div class="flex_column">
+        <div class="flex_row space_between">
+            <div class="flex_row align_center">
+                <!--Statement Type Selection-->
+                <p>Statement Type</p>
+                <option-form-field [label]="'Statement'" [options]="statementTypes" (selection)="setStatementType($event)"></option-form-field>
+            </div>
+            <div class="flex_row align_center">
+                <!--Table Selection-->
+                <p>Table</p>
+                <option-form-field [label]="'Table'" [options]="getTableNames()" (selection)="setTable($event)">
+                </option-form-field>
+            </div>
+        </div>
+        <div>
+            <p style="font-size: 10px; color: grey">Form your statement here and add to the Full Statement</p>
+            <div class="flex_row align_top">
+                <!--Mini Statement-->
+                <textarea class="rounded_box miniStatement" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                    spellcheck="false" [value]="miniStatement" [(ngModel)]="miniStatement">
+                </textarea>
+                <button mat-icon-button (click)="addMiniToFull()">
+                    <mat-icon class="mat_icon_circle_button_primary">add</mat-icon>
+                </button>
+            </div>
+            <div class="flex_row align_center">
+                <!--Field/Condition Chips-->
+                <mat-chip-list *ngIf="tableIsSet()">
+                    <mat-chip *ngFor="let field of getFieldNames(currentTable)">{{field}}</mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+        <div class="flex_row align_center space_between" *ngIf="tableIsSet()">
+            <!--Add Conditions-->
+            <p>Add Condition</p>
+            <option-form-field [label]="'Field'" [options]="getFieldNames(currentTable)"></option-form-field>
+            <option-form-field [options]="['=','IN']" [width]="'3em'"></option-form-field>
+            <mat-form-field>
+                <mat-label>Value</mat-label>
+                <input matInput spellcheck="false">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="flex_column width_50">
+        <!--Full Statement-->
+        <div class="flex_row align_center pad_top space_between">
+            <h3>Full Statement</h3>
+            <div id="buttons">
+                <button mat-icon-button [cdkCopyToClipboard]="fullStatement">
+                    <mat-icon class="mat_icon_circle_button_secondary">file_copy</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon class="mat_icon_circle_button_secondary">email</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon class="mat_icon_circle_button_secondary">clear</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <textarea class="fullStatement" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" spellcheck="false"
+            [value]="fullStatement" [(ngModel)]="fullStatement">
+    </textarea>
+    </div>
+</div>

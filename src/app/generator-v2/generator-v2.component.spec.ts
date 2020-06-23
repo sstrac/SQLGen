@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InsertFormComponent } from './insert-form.component';
+import { GeneratorV2Component } from './generator-v2.component';
 
-describe('InsertFormComponent', () => {
-  let component: InsertFormComponent;
-  let fixture: ComponentFixture<InsertFormComponent>;
+describe('GeneratorV2Component', () => {
+  let component: GeneratorV2Component;
+  let fixture: ComponentFixture<GeneratorV2Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InsertFormComponent ]
+      declarations: [ GeneratorV2Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InsertFormComponent);
+    fixture = TestBed.createComponent(GeneratorV2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
