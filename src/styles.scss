@@ -15,7 +15,10 @@ body { font-family: Roboto, "Helvetica Neue Light" , "Helvetica Neue", "Helvetic
     margin: 1em;
 }
 .spacing_top{
-    margin-top: 0.5em;
+    margin-top: 1em;
+}
+.spacing_left{
+    margin-left: 1em;
 }
 .align_center{
     align-items: center;
@@ -34,6 +37,9 @@ body { font-family: Roboto, "Helvetica Neue Light" , "Helvetica Neue", "Helvetic
 }
 .space_evenly{
     justify-content: space-evenly;
+}
+.space_center{
+    justify-content: center;
 }
 .flex_row{
     display: flex;
@@ -56,17 +62,25 @@ body { font-family: Roboto, "Helvetica Neue Light" , "Helvetica Neue", "Helvetic
 mat-icon{
     border-radius: 50%;
 }
-.mat_icon_circle_button_primary{
+.circle_button{
+    border-radius: 50%;
+}
+.button_primary{
     background-color: rgb(255, 74, 119);
     color: white;
-    border-radius: 50%;
-    font-size: 15px;
 }
-.mat_icon_circle_button_secondary{
+.button_secondary{
     background-color: white;
     color: rgb(255, 74, 119);
-    border-radius: 50%;
+}
+.icon_small{
+    font-size: 15px;
+}
+.icon_medium{
     font-size: 20px;
+}
+.icon_large{
+    font-size: 25px;
 }
 mat-form-field{
     margin: unset;

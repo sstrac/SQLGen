@@ -1,19 +1,21 @@
 <div class="flex_row align_top space_around spacing">
     <div class="flex_column">
-        <div class="flex_row space_between" style="margin-bottom: 2em;">
+        <h2>Statement Configuration</h2>
+        <div class="flex_row space_between align_center" style="margin-bottom: 2em;">
+            <p>Statement Type</p>
             <div class="flex_row align_center">
                 <!--Statement Type Selection-->
-                <p>Statement Type</p>
-                <option-form-field [label]="'Statement'" [options]="statementTypes" (selection)="onStatementSelect($event)"></option-form-field>
+                <option-form-field [options]="statementTypes"
+                    (selection)="onStatementSelect($event)"></option-form-field>
             </div>
+            <p>Table</p>
             <div class="flex_row align_center">
                 <!--Table Selection-->
-                <p>Table</p>
-                <option-form-field [label]="'Table'" [options]="getTableNames()" (selection)="onTableSelect($event)">
+                <option-form-field [options]="getTableNames()" (selection)="onTableSelect($event)">
                 </option-form-field>
             </div>
         </div>
-        <div *ngIf="selectIsReady()">
+        <div *ngIf="selectIsReady()" style="margin-bottom: 2em;">
             <p style="font-size: 10px; color: grey">Form your statement here and add to the Full Statement</p>
             <div class="flex_row align_center">
                 <!--Mini Statement-->
@@ -21,26 +23,54 @@
                     spellcheck="false" [value]="state.statement" [(ngModel)]="state.statement">
                 </textarea>
                 <button mat-icon-button (click)="addMiniToFull()">
-                    <mat-icon class="mat_icon_circle_button_primary">add</mat-icon>
+                    <mat-icon class="circle_button button_secondary icon_large">add_circle_outline</mat-icon>
                 </button>
             </div>
-            <div class="flex_row align_center spacing_top">
-                <!--Field/Condition Chips-->
-                <mat-chip-list>
-                    <mat-chip #chip *ngFor="let field of getTableByName(state.table.tableName).tableFields" (click)="toggleFields(field)"
-                    [ngStyle]="{'background-color': toggleChipStyle(field)}">{{field}}</mat-chip>
-                </mat-chip-list>
-            </div>
+            <!--Field/Condition Chips-->
+            <mat-chip-list class="flex_row align_center chip_list_spacing">
+                <mat-chip *ngFor="let field of getTableByName(state.table.tableName).tableFields"
+                    (click)="toggleFields(field)" [ngStyle]="{'background-color': toggleChipStyle(field)}">{{field}}
+                </mat-chip>
+            </mat-chip-list>
+            <mat-chip-list class="flex_row align_center chip_list_spacing">
+                <mat-chip class="space_center" *ngFor="let condition of conditions">
+                    <span class="spacing_left">{{condition}}</span>
+                    <button mat-icon-button>
+                        <mat-icon class="circle_button icon_medium">clear</mat-icon>
+                    </button>
+                </mat-chip>
+            </mat-chip-list>
         </div>
-        <div class="flex_row align_center space_between" *ngIf="selectIsReady()">
+        <h2 *ngIf="selectIsReady()">Conditions</h2>
+        <div class="flex_column" *ngIf="selectIsReady()">
             <!--Add Conditions-->
-            <p>Add Condition</p>
-            <option-form-field [label]="'Field'" [options]=" getTableByName(state.table.tableName).tableFields"></option-form-field>
-            <option-form-field [options]="['=','IN']" [width]="'3em'"></option-form-field>
-            <mat-form-field>
-                <mat-label>Value</mat-label>
-                <input matInput spellcheck="false">
-            </mat-form-field>
+            <mat-divider></mat-divider>
+            <form #conditionForm [formGroup]="formGroup" (ngSubmit)="submit()" class="flex_row align_center space_between">
+                <p>Add Condition</p>
+                <mat-form-field>
+                    <mat-label>Field</mat-label>
+                    <mat-select formControlName="field">
+                        <mat-option *ngFor="let field of getTableByName(state.table.tableName).tableFields" [value]="field">
+                            {{field}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select formControlName="operand">
+                        <mat-option *ngFor="let operand of ['=', 'IN']" [value]="operand">
+                            {{operand}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="input_spacing">
+                    <mat-label>Value</mat-label>
+                    <input formControlName="value" matInput spellcheck="false">
+                </mat-form-field>
+                <mat-checkbox>string?</mat-checkbox>
+                <button mat-icon-button type=submit>
+                    <mat-icon class="circle_button button_secondary icon_large">add_circle_outline</mat-icon>
+                </button>
+            </form>
         </div>
     </div>
     <div class="flex_column width_50">
@@ -49,13 +79,13 @@
             <h3>Full Statement</h3>
             <div id="buttons">
                 <button mat-icon-button [cdkCopyToClipboard]="state.fullStatement">
-                    <mat-icon class="mat_icon_circle_button_secondary">file_copy</mat-icon>
+                    <mat-icon class="circle_button button_secondary icon_medium">file_copy</mat-icon>
                 </button>
                 <button mat-icon-button>
-                    <mat-icon class="mat_icon_circle_button_secondary">email</mat-icon>
+                    <mat-icon class="circle_button button_secondary icon_medium">email</mat-icon>
                 </button>
                 <button mat-icon-button>
-                    <mat-icon class="mat_icon_circle_button_secondary">clear</mat-icon>
+                    <mat-icon class="circle_button button_secondary icon_medium">clear</mat-icon>
                 </button>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TablesInteractor } from '../services/tables-interactor.service';
 import { Table } from '../model/table.interface';
+import { FormGroup, FormControl } from '@angular/forms';
 
 interface GeneratorState {
   statementType?: string,
@@ -19,9 +20,10 @@ export class GeneratorV2Component implements OnInit {
   //Non-volatile data
   statementTypes = ['SELECT', 'INSERT']
   tables: Table[] = []
-  conditions: string[] = []
+  conditions: string[] = ["author=rahld dahl"]
   //Volatile
   state: GeneratorState
+  formGroup: FormGroup
 
   constructor(private tablesInteractor: TablesInteractor) { }
 
@@ -38,15 +40,31 @@ export class GeneratorV2Component implements OnInit {
       fullStatement: "",
       conditions: []
     }
+    this.formGroup = new FormGroup({
+      field: new FormControl(''),
+      operand: new FormControl(''),
+      value: new FormControl('')
+    })
+  }
+
+  submit() {
+    console.log(this.formGroup)
+    let joinWord: string = this.conditions.length == 0 ? ' WHERE ' : ' AND '
+    this.conditions.push(
+      joinWord +
+      this.formGroup.value['field'] + " " +
+      this.formGroup.value['operand'] + " " +
+      this.formGroup.value['value']
+    )
   }
 
   update(): void {
-    if(this.selectIsReady()){
+    if (this.selectIsReady()) {
       this.updateSelect()
     }
   }
 
-  selectIsReady(): boolean{ 
+  selectIsReady(): boolean {
     return this.tableIsSet() && this.statementTypeIsSet('SELECT')
   }
 
@@ -59,7 +77,7 @@ export class GeneratorV2Component implements OnInit {
       this.state.conditions.join(", ") + ";"
   }
 
-  onTableSelect( tablename: string ) {
+  onTableSelect(tablename: string) {
     let tablefields = this.getCopyTableFields(tablename)
     this.state.table = { tableName: tablename, tableFields: tablefields }
     this.update()
@@ -94,10 +112,6 @@ export class GeneratorV2Component implements OnInit {
 
   toggleFields(field: string) {
     this.state.table.tableFields.includes(field) ? this.dropField(field) : this.addField(field)
-    console.log("state: \n")
-    console.log(this.state)
-    console.log("static: \n")
-    console.log(this.tables)
     this.update()
   }
 
