@@ -10,6 +10,7 @@ export class OptionFormFieldComponent implements OnInit {
 
   @Input() label?: string
   @Input() options: string[]
+  @Input() width?
   @Output() selection: EventEmitter<MatSelectChange> = new EventEmitter()
 
   constructor() { }

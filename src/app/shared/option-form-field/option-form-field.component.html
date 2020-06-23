@@ -1,4 +1,4 @@
-<mat-form-field>
+<mat-form-field [ngStyle]="{'width': width}">
     <mat-label>{{label}}</mat-label>
     <mat-select>
         <mat-option *ngFor="let option of options" [value]="option" (onSelectionChange)="selectionChange($event)">
