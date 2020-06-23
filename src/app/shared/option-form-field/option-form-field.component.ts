@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'option-form-field',
@@ -23,7 +24,8 @@ export class OptionFormFieldComponent implements OnInit {
     // let prevLabel = changes.label.previousValue
   }
 
-  selectionChange(event){
-    this.selection.emit(event.source.value)
+  selectionChange(event: MatOptionSelectionChange){
+    if(event.isUserInput)
+      this.selection.emit(event.source.value)
   }
 }

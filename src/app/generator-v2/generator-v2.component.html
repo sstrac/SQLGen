@@ -1,41 +1,41 @@
 <div class="flex_row align_top space_around spacing">
     <div class="flex_column">
-        <div class="flex_row space_between">
+        <div class="flex_row space_between" style="margin-bottom: 2em;">
             <div class="flex_row align_center">
                 <!--Statement Type Selection-->
                 <p>Statement Type</p>
-                <option-form-field [label]="'Statement'" [options]="statementTypes" (selection)="setStatementType($event)"></option-form-field>
+                <option-form-field [label]="'Statement'" [options]="statementTypes" (selection)="onStatementSelect($event)"></option-form-field>
             </div>
             <div class="flex_row align_center">
                 <!--Table Selection-->
                 <p>Table</p>
-                <option-form-field [label]="'Table'" [options]="getTableNames()" (selection)="setTable($event)">
+                <option-form-field [label]="'Table'" [options]="getTableNames()" (selection)="onTableSelect($event)">
                 </option-form-field>
             </div>
         </div>
-        <div *ngIf="tableIsSet()">
+        <div *ngIf="selectIsReady()">
             <p style="font-size: 10px; color: grey">Form your statement here and add to the Full Statement</p>
-            <div class="flex_row align_top">
+            <div class="flex_row align_center">
                 <!--Mini Statement-->
                 <textarea class="rounded_box miniStatement" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                    spellcheck="false" [value]="miniStatement" [(ngModel)]="miniStatement">
+                    spellcheck="false" [value]="state.statement" [(ngModel)]="state.statement">
                 </textarea>
                 <button mat-icon-button (click)="addMiniToFull()">
                     <mat-icon class="mat_icon_circle_button_primary">add</mat-icon>
                 </button>
             </div>
-            <div class="flex_row align_center small_spacing">
+            <div class="flex_row align_center spacing_top">
                 <!--Field/Condition Chips-->
                 <mat-chip-list>
-                    <mat-chip #chip *ngFor="let field of allFields" (click)="toggleFields(field)"
+                    <mat-chip #chip *ngFor="let field of getTableByName(state.table.tableName).tableFields" (click)="toggleFields(field)"
                     [ngStyle]="{'background-color': toggleChipStyle(field)}">{{field}}</mat-chip>
                 </mat-chip-list>
             </div>
         </div>
-        <div class="flex_row align_center space_between" *ngIf="tableIsSet()">
+        <div class="flex_row align_center space_between" *ngIf="selectIsReady()">
             <!--Add Conditions-->
             <p>Add Condition</p>
-            <option-form-field [label]="'Field'" [options]="allFields"></option-form-field>
+            <option-form-field [label]="'Field'" [options]=" getTableByName(state.table.tableName).tableFields"></option-form-field>
             <option-form-field [options]="['=','IN']" [width]="'3em'"></option-form-field>
             <mat-form-field>
                 <mat-label>Value</mat-label>
@@ -48,7 +48,7 @@
         <div class="flex_row align_center pad_top space_between">
             <h3>Full Statement</h3>
             <div id="buttons">
-                <button mat-icon-button [cdkCopyToClipboard]="fullStatement">
+                <button mat-icon-button [cdkCopyToClipboard]="state.fullStatement">
                     <mat-icon class="mat_icon_circle_button_secondary">file_copy</mat-icon>
                 </button>
                 <button mat-icon-button>
@@ -61,7 +61,7 @@
         </div>
         <mat-divider></mat-divider>
         <textarea class="fullStatement" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" spellcheck="false"
-            [value]="fullStatement" [(ngModel)]="fullStatement">
+            [value]="state.fullStatement" [(ngModel)]="state.fullStatement">
     </textarea>
     </div>
 </div>
