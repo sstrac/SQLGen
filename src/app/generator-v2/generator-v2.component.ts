@@ -20,7 +20,7 @@ export class GeneratorV2Component implements OnInit {
   //Non-volatile data
   statementTypes = ['SELECT', 'INSERT']
   tables: Table[] = []
-  conditions: string[] = ["author=rahld dahl"]
+  conditions: string[] = []
   //Volatile
   state: GeneratorState
   formGroup: FormGroup
@@ -47,17 +47,6 @@ export class GeneratorV2Component implements OnInit {
     })
   }
 
-  submit() {
-    console.log(this.formGroup)
-    let joinWord: string = this.conditions.length == 0 ? ' WHERE ' : ' AND '
-    this.conditions.push(
-      joinWord +
-      this.formGroup.value['field'] + " " +
-      this.formGroup.value['operand'] + " " +
-      this.formGroup.value['value']
-    )
-  }
-
   update(): void {
     if (this.selectIsReady()) {
       this.updateSelect()
@@ -73,8 +62,11 @@ export class GeneratorV2Component implements OnInit {
       ? '*' : this.state.table.tableFields.join(", ")
     this.state.statement = "SELECT " +
       fields + " FROM " +
-      this.state.table.tableName +
-      this.state.conditions.join(", ") + ";"
+      this.state.table.tableName
+    if(this.state.conditions.length !== 0){
+      this.state.statement += " WHERE " + this.state.conditions.join(" AND ")
+    }
+      
   }
 
   onTableSelect(tablename: string) {
@@ -102,21 +94,48 @@ export class GeneratorV2Component implements OnInit {
   //-- Full Statement Logic --//
   addMiniToFull() {
     if (this.state.statement != "") {
-      this.state.fullStatement += "\n" + this.state.statement
+      this.state.fullStatement += "\n" + this.state.statement + ";"
     }
   }
 
   //-- Field Chips Logic --//
-  dropField = (field: string) => this.state.table.tableFields.splice(this.state.table.tableFields.indexOf(field), 1)
-  addField = (field: string) => this.state.table.tableFields.push(field)
+  deactivateField = (field: string) => this.state.table.tableFields.splice(this.state.table.tableFields.indexOf(field), 1)
+  activateField = (field: string) => this.state.table.tableFields.push(field)
 
-  toggleFields(field: string) {
-    this.state.table.tableFields.includes(field) ? this.dropField(field) : this.addField(field)
+  toggleField(field: string) {
+    this.state.table.tableFields.includes(field) ? this.deactivateField(field) : this.activateField(field)
     this.update()
   }
 
-  toggleChipStyle = (field) => this.state.table.tableFields.includes(field) ? 'pink' : 'lightgrey'
+  toggleFieldChipStyle = (field: string) => this.state.table.tableFields.includes(field) ? 'pink' : 'lightgrey'
 
   //-- Conditions Chips Logic --//
-  toggleConditionChipStyle = (condition) => this.state.conditions.includes(condition) ? '#CD344E' : 'lightgrey'
+  activateCondition = (condition: string) => this.state.conditions.push(condition)
+
+  deactivateCondition = (condition: string) => this.state.conditions.splice(this.state.conditions.indexOf(condition), 1)
+
+  toggleCondition(condition: string){
+    /*TODO: Block the ability to add already existing condition*/
+    this.state.conditions.includes(condition) ? this.deactivateCondition(condition) : this.activateCondition(condition)
+    this.update()
+  }
+
+  toggleConditionChipStyle = (condition: string) => this.state.conditions.includes(condition) ? '#B5F6D6' : 'lightgrey'
+  
+  dropCondition = (condition: string) => {
+    this.deactivateCondition(condition)
+    this.conditions.splice(this.conditions.indexOf(condition), 1)
+    this.update()
+  }
+
+  addCondition() {
+    let condition = (
+      this.formGroup.value['field'] + " " +
+      this.formGroup.value['operand'] + " " +
+      this.formGroup.value['value']
+    )
+    this.conditions.push(condition)
+    this.activateCondition(condition)
+    this.update()
+  }
 }

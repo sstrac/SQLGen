@@ -2,15 +2,15 @@
     <div class="flex_column">
         <h2>Statement Configuration</h2>
         <div class="flex_row space_between align_center" style="margin-bottom: 2em;">
-            <p>Statement Type</p>
             <div class="flex_row align_center">
                 <!--Statement Type Selection-->
+                <p>Statement Type</p>
                 <option-form-field [options]="statementTypes"
                     (selection)="onStatementSelect($event)"></option-form-field>
             </div>
-            <p>Table</p>
             <div class="flex_row align_center">
                 <!--Table Selection-->
+                <p>Table</p>
                 <option-form-field [options]="getTableNames()" (selection)="onTableSelect($event)">
                 </option-form-field>
             </div>
@@ -29,13 +29,14 @@
             <!--Field/Condition Chips-->
             <mat-chip-list class="flex_row align_center chip_list_spacing">
                 <mat-chip *ngFor="let field of getTableByName(state.table.tableName).tableFields"
-                    (click)="toggleFields(field)" [ngStyle]="{'background-color': toggleChipStyle(field)}">{{field}}
+                    (click)="toggleField(field)" [ngStyle]="{'background-color': toggleFieldChipStyle(field)}">{{field}}
                 </mat-chip>
             </mat-chip-list>
             <mat-chip-list class="flex_row align_center chip_list_spacing">
-                <mat-chip class="space_center" *ngFor="let condition of conditions">
+                <mat-chip class="space_center" *ngFor="let condition of conditions"
+                (click)="toggleCondition(condition)" [ngStyle]="{'background-color': toggleConditionChipStyle(condition)}">
                     <span class="spacing_left">{{condition}}</span>
-                    <button mat-icon-button>
+                    <button mat-icon-button (click)="dropCondition(condition)">
                         <mat-icon class="circle_button icon_medium">clear</mat-icon>
                     </button>
                 </mat-chip>
@@ -45,7 +46,7 @@
         <div class="flex_column" *ngIf="selectIsReady()">
             <!--Add Conditions-->
             <mat-divider></mat-divider>
-            <form #conditionForm [formGroup]="formGroup" (ngSubmit)="submit()" class="flex_row align_center space_between">
+            <form #conditionForm [formGroup]="formGroup" (ngSubmit)="addCondition()" class="flex_row align_center space_between">
                 <p>Add Condition</p>
                 <mat-form-field>
                     <mat-label>Field</mat-label>
@@ -76,7 +77,7 @@
     <div class="flex_column width_50">
         <!--Full Statement-->
         <div class="flex_row align_center pad_top space_between">
-            <h3>Full Statement</h3>
+            <h3><i>Full Statement</i></h3>
             <div id="buttons">
                 <button mat-icon-button [cdkCopyToClipboard]="state.fullStatement">
                     <mat-icon class="circle_button button_secondary icon_medium">file_copy</mat-icon>
