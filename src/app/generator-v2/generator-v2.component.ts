@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TablesInteractor } from '../services/tables-interactor.service';
 import { Table } from '../model/table.interface';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface GeneratorState {
   statementType?: string,
@@ -25,7 +27,9 @@ export class GeneratorV2Component implements OnInit {
   state: GeneratorState
   formGroup: FormGroup
 
-  constructor(private tablesInteractor: TablesInteractor) { }
+  conditionIsString: boolean = false
+
+  constructor(private tablesInteractor: TablesInteractor, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.tablesInteractor.getTables().subscribe(data => {
@@ -98,6 +102,14 @@ export class GeneratorV2Component implements OnInit {
     }
   }
 
+  clearFull(){
+    this.state.fullStatement = ""
+  }
+
+  notifyCopied(){
+    this.snackBar.open('Copied', null, { duration: 2000 })
+  }
+
   //-- Field Chips Logic --//
   deactivateField = (field: string) => this.state.table.tableFields.splice(this.state.table.tableFields.indexOf(field), 1)
   activateField = (field: string) => this.state.table.tableFields.push(field)
@@ -131,11 +143,16 @@ export class GeneratorV2Component implements OnInit {
   addCondition() {
     let condition = (
       this.formGroup.value['field'] + " " +
-      this.formGroup.value['operand'] + " " +
-      this.formGroup.value['value']
+      this.formGroup.value['operand'] + " "
     )
+    condition += this.conditionIsString
+      ? "'" + this.formGroup.value['value'] + "'"
+      : this.formGroup.value['value']
+
     this.conditions.push(condition)
     this.activateCondition(condition)
     this.update()
   }
+
+  checkboxChange = (event: MatCheckboxChange) => this.conditionIsString = event.checked
 }

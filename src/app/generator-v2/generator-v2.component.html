@@ -67,7 +67,7 @@
                     <mat-label>Value</mat-label>
                     <input formControlName="value" matInput spellcheck="false">
                 </mat-form-field>
-                <mat-checkbox>string?</mat-checkbox>
+                <mat-checkbox (change)="checkboxChange($event)">string?</mat-checkbox>
                 <button mat-icon-button type=submit>
                     <mat-icon class="circle_button button_secondary icon_large">add_circle_outline</mat-icon>
                 </button>
@@ -79,14 +79,14 @@
         <div class="flex_row align_center pad_top space_between">
             <h3><i>Full Statement</i></h3>
             <div id="buttons">
-                <button mat-icon-button [cdkCopyToClipboard]="state.fullStatement">
+                <button mat-icon-button [cdkCopyToClipboard]="state.fullStatement" (click)="notifyCopied()">
                     <mat-icon class="circle_button button_secondary icon_medium">file_copy</mat-icon>
                 </button>
                 <button mat-icon-button>
                     <mat-icon class="circle_button button_secondary icon_medium">email</mat-icon>
                 </button>
                 <button mat-icon-button>
-                    <mat-icon class="circle_button button_secondary icon_medium">clear</mat-icon>
+                    <mat-icon (click)="clearFull()" class="circle_button button_secondary icon_medium">clear</mat-icon>
                 </button>
             </div>
         </div>

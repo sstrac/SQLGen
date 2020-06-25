@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InsertFormModule } from '../shared/insert-form/insert-form.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 const routes: Routes = [
   { path: '', component: GeneratorV2Component}
 ]
@@ -39,6 +39,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatSelectModule,
     MatOptionModule,
+    MatSnackBarModule,
     ClipboardModule,
     RouterModule.forChild(routes)
   ]
