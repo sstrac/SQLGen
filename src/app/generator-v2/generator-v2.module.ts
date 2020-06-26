@@ -15,14 +15,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InsertFormModule } from '../shared/insert-form/insert-form.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SelectComponent } from './select/select.component'
+
 const routes: Routes = [
   { path: '', component: GeneratorV2Component}
 ]
 
 @NgModule({
   declarations: [
-    GeneratorV2Component
+    GeneratorV2Component,
+    SelectComponent
   ],
   imports: [
     CommonModule,
