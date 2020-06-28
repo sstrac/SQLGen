@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { TablesInteractor } from '../services/tables-interactor.service';
 import { Table } from '../model/table.interface';
-import { EventEmitter } from 'protractor';
 
 interface GeneratorState {
   statementType?: string,

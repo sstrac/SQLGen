@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
