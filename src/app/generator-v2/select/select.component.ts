@@ -6,7 +6,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 
 interface SelectState {
   table: Table
-  statement?: string
+  statement?: string[]
   fullStatement?: string,
   conditions?: string[]
 }
@@ -29,7 +29,7 @@ export class SelectComponent implements OnInit {
   ngOnInit(): void {
     this.state = {
       table: this.table,
-      statement: "",
+      statement: [],
       fullStatement: "",
       conditions: []
     }
@@ -38,6 +38,7 @@ export class SelectComponent implements OnInit {
       operand: new FormControl(''),
       value: new FormControl('')
     })
+    this.update()
   }
   
   update(): void {
@@ -45,23 +46,35 @@ export class SelectComponent implements OnInit {
   }
 
   updateSelect() {
+    this.state.statement = []
     let fields: string = this.state.table.tableFields.length == this.getTableByName(this.state.table.tableName).tableFields.length
       ? '*' : this.state.table.tableFields.join(", ")
-    this.state.statement = "SELECT " +
-      fields + " FROM " +
-      this.state.table.tableName
+    this.state.statement.push("SELECT")
+    this.state.statement.push(fields)
+    this.state.statement.push("FROM")
+    this.state.statement.push(this.state.table.tableName)      
     if(this.state.conditions.length !== 0){
-      this.state.statement += " WHERE " + this.state.conditions.join(" AND ")
+      this.state.statement.push("WHERE")
+      this.state.conditions.forEach( condition => {
+        this.state.statement.push(condition)
+        if(this.state.conditions[this.state.conditions.indexOf(condition)+1] != undefined){
+          this.state.statement.push("AND")
+        }
+      })
     }
       
+  }
+
+  appendWord(event){
+    console.log(event)
   }
   
   getTableByName = (tablename: string): Table => this.tables.filter(table => table.tableName == tablename)[0]
   
   //-- Full Statement Logic --//
   addMiniToFull() {
-    if (this.state.statement != "") {
-      this.state.fullStatement += "\n" + this.state.statement + ";"
+    if (this.state.statement.length != 0) {
+      this.state.fullStatement += "\n" + this.state.statement.join(" ") + ";"
     }
   }
 
@@ -95,7 +108,7 @@ export class SelectComponent implements OnInit {
     this.update()
   }
 
-  toggleConditionChipStyle = (condition: string) => this.state.conditions.includes(condition) ? '#B5F6D6' : 'lightgrey'
+  toggleConditionChipStyle = (condition: string) => this.state.conditions.includes(condition) ? '#B6C4FF' : 'lightgrey'
   
   dropCondition = (condition: string) => {
     this.deactivateCondition(condition)

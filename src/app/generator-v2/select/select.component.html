@@ -1,10 +1,10 @@
-<div style="margin-bottom: 2em;">
+<div class="flex_row">
+<div class="flex_column" style="width: 50%">
+<div id="mini_statement" style="margin-bottom: 2em;">
     <p style="font-size: 10px; color: grey">Form your statement here and add to the Full Statement</p>
-    <div class="flex_row align_center">
+    <div class="flex_row align_center" style="width: inherit;">
         <!--Mini Statement-->
-        <textarea class="rounded_box miniStatement" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-            spellcheck="false" [value]="state.statement" [(ngModel)]="state.statement">
-        </textarea>
+        <code-textarea [content]="state.statement" codeStyle="sql" style="width: 92%"></code-textarea>
         <button mat-icon-button (click)="addMiniToFull()">
             <mat-icon class="circle_button button_secondary icon_large">add_circle_outline</mat-icon>
         </button>
@@ -25,9 +25,9 @@
         </mat-chip>
     </mat-chip-list>
 </div>
-<h2>Conditions</h2>
-<div class="flex_column">
+<div id="conditions" class="flex_column">
     <!--Add Conditions-->
+    <h2>Conditions</h2>
     <mat-divider></mat-divider>
     <form #conditionForm [formGroup]="formGroup" (ngSubmit)="addCondition()"
         class="flex_row align_center space_between">
@@ -40,7 +40,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field style="width: 3em;">
             <mat-select formControlName="operand">
                 <mat-option *ngFor="let operand of ['=', 'IN']" [value]="operand">
                     {{operand}}
@@ -57,7 +57,8 @@
         </button>
     </form>
 </div>
-<div class="flex_column width_50">
+</div>
+<div id="full_statement" class="flex_column width_50" style="width: 50%">
     <!--Full Statement-->
     <div class="flex_row align_center pad_top space_between">
         <h3><i>Full Statement</i></h3>
@@ -77,4 +78,5 @@
     <textarea class="fullStatement" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" spellcheck="false"
         [value]="state.fullStatement" [(ngModel)]="state.fullStatement">
 </textarea>
+</div>
 </div>

@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { routes } from 'src/routes';
 import { RouterModule, RouteReuseStrategy } from '@angular/router'
 import { LocalStorageService } from './services/local-storage.service';
-import { TableDataService } from './services/table-data.service';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTabsModule } from '@angular/material/tabs'
 import { SQLGenReuseStrategy } from './shared/sqlgen-route-reuse-strategy';

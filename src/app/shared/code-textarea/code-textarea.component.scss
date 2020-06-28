@@ -1,0 +1,23 @@
+.rounded_box{
+    border-radius: 3%;
+    // border: solid;
+    // border-width: thin;
+    // border-color: rgb(156, 156, 156);
+    height: fit-content;
+    width: 80%;
+    box-shadow: 1px 2px 4px rgb(209, 209, 209);
+    padding: 1em;
+    width: inherit;
+}
+.keyword{
+    color:rgb(0, 0, 200);
+}
+.important{
+    font-weight: bold;
+}
+.base{
+    color: #9C6524
+}
+.operand{
+    color: #888888
+}

@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SelectComponent } from './select/select.component'
+import { CodeTextareaComponent } from '../shared/code-textarea/code-textarea.component';
 
 const routes: Routes = [
   { path: '', component: GeneratorV2Component}
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     GeneratorV2Component,
-    SelectComponent
+    SelectComponent,
+    CodeTextareaComponent
   ],
   imports: [
     CommonModule,
