@@ -18,7 +18,7 @@
     <mat-chip-list class="flex_row align_center chip_list_spacing">
         <mat-chip class="space_center" *ngFor="let condition of conditions" (click)="toggleCondition(condition)"
             [ngStyle]="{'background-color': toggleConditionChipStyle(condition)}">
-            <span class="spacing_left">{{condition}}</span>
+            <span class="spacing_left">{{condition.field}} {{condition.operand}} {{condition.value}}</span>
             <button mat-icon-button (click)="dropCondition(condition)">
                 <mat-icon class="circle_button icon_medium">clear</mat-icon>
             </button>

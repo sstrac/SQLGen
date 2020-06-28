@@ -35,8 +35,11 @@ export class CodeTextareaComponent implements OnInit{
     else if (sqlKeywords.includes(word)){
       return { 'keyword': true }
     }
-    else if (sqlOperands.includes(word)){
+    else if (sqlJoiners.includes(word)){
       return { 'operand': true }
+    }
+    else if (sqlContainers.includes(word)){
+      return { 'container': true }
     }
     else{
       return { 'base': true }
@@ -44,6 +47,7 @@ export class CodeTextareaComponent implements OnInit{
   }
 }
 
-const sqlImportantKeywords = [ "SELECT", "FROM", "FROM", "AND", "IN" ]
+const sqlImportantKeywords = [ "SELECT", "WHERE", "FROM", "AND", "IN" ]
 const sqlKeywords = ["TRIM"]
-const sqlOperands = ["=", "|", "*"]
+const sqlJoiners = ["=", "|", "*", ","]
+const sqlContainers = ["(", ")"]
