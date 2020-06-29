@@ -1,23 +1,37 @@
-<div class="flex_row align_center">
-    <button class="button_small" mat-icon-button (click)="toggleTablesShowing()">
-        <mat-icon class="circle_button icon_medium">chevron_right</mat-icon>
-    </button>
-    <img src="../../assets/database.png">
-    <p>{{database}}</p>
-</div>
-<div *ngIf="state.showTables">
-    <div *ngFor="let table of tables" class="flex_column spacing_left">
+<div class="flex_row">
+    <div id="table-list" style="width: 20em;">
         <div class="flex_row align_center">
-            <button class="button_small" mat-icon-button (click)="toggleFieldsShowing(table)">
+            <button class="button_small" mat-icon-button (click)="toggleTablesShowing()">
                 <mat-icon class="circle_button icon_medium">chevron_right</mat-icon>
             </button>
-            <img src='../../assets/table.png'>
-            <p>{{table.tableName}}</p>
+            <img src="../../assets/database.png">
+            <p>{{database}}</p>
         </div>
-        <div *ngIf="table.expandFields">
-            <div *ngFor="let field of table.tableFields" class="flex_row align_center">                
-                <li class="list_spacing">{{field}}</li>
+        <div *ngIf="state.showTables">
+            <div *ngFor="let table of tables" class="flex_column spacing_left">
+                <div class="flex_row align_center space_between spacing_right">
+                    <div class="flex_row align_center">
+                        <button class="button_small" mat-icon-button (click)="toggleFieldsShowing(table)">
+                            <mat-icon class="circle_button icon_medium">chevron_right</mat-icon>
+                        </button>
+                        <img src='../../assets/table.png'>
+                        <p>{{table.tableName}}</p>
+                    </div>
+                    <button mat-icon-button>
+                        <mat-icon class="circle_button icon_small">add</mat-icon>
+                    </button>
+                </div>
+                <div *ngIf="table.expandFields">
+                    <div *ngFor="let field of table.tableFields"
+                        class="flex_row align_center space_between spacing_right">
+                        <li class="list_spacing">{{field}}</li>
+                        <button mat-icon-button>
+                            <mat-icon class="circle_button icon_small">clear</mat-icon>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <h2>New Table</h2>
 </div>
