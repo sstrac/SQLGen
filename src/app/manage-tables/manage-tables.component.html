@@ -1,0 +1,23 @@
+<div class="flex_row align_center">
+    <button class="button_small" mat-icon-button (click)="toggleTablesShowing()">
+        <mat-icon class="circle_button icon_medium">chevron_right</mat-icon>
+    </button>
+    <img src="../../assets/database.png">
+    <p>{{database}}</p>
+</div>
+<div *ngIf="state.showTables">
+    <div *ngFor="let table of tables" class="flex_column spacing_left">
+        <div class="flex_row align_center">
+            <button class="button_small" mat-icon-button (click)="toggleFieldsShowing(table)">
+                <mat-icon class="circle_button icon_medium">chevron_right</mat-icon>
+            </button>
+            <img src='../../assets/table.png'>
+            <p>{{table.tableName}}</p>
+        </div>
+        <div *ngIf="table.expandFields">
+            <div *ngFor="let field of table.tableFields" class="flex_row align_center">                
+                <li class="list_spacing">{{field}}</li>
+            </div>
+        </div>
+    </div>
+</div>

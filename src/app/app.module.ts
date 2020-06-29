@@ -11,6 +11,7 @@ import { SQLGenReuseStrategy } from './shared/sqlgen-route-reuse-strategy';
 import { HttpClientModule } from '@angular/common/http'
 import { TablesInteractor } from './services/tables-interactor.service';
 import { GeneratorV2Module } from './generator-v2/generator-v2.module';
+import { ManageTablesModule } from './manage-tables/manage-tables.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { GeneratorV2Module } from './generator-v2/generator-v2.module';
     MatToolbarModule,
     MatTabsModule,
     GeneratorV2Module,
+    ManageTablesModule,
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
