@@ -1,0 +1,20 @@
+<div class="flex_row align_center">
+    <mat-form-field>
+        <mat-label>Table Name</mat-label>
+        <input matInput [(ngModel)]="tableName">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Add Table Field</mat-label>
+        <input #field matInput>
+    </mat-form-field>
+    <button mat-icon-button (click)="addField(field.value)">
+        <mat-icon class="circle_button button_secondary icon_large">add_circle_outline</mat-icon>
+    </button>
+</div>
+<div class="flex_row align_top space_between">
+    <div class="spacing_left">
+        <p><strong>Fields</strong></p>
+        <p *ngFor="let field of fields">{{field}}</p>
+    </div>
+    <button mat-raised-button color="accent" (click)="addTable()">Add Table</button>
+</div>
