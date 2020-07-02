@@ -11,13 +11,18 @@ export class TablesInteractor implements TableService{
 
     constructor(private http: HttpClient){}
 
-    addTable() {
+    addTable(table: Table) {
+        try{
+            return this.http.post<Table>(tablesUrl, table)
+        } catch (e) {
+            throw e
+        }
     }
     getTables(): Observable<Table[]> {
         let tables = this.http.get<Table[]>(tablesUrl)
         return tables
     }
-    deleteTable() {
+    deleteTable(): boolean {
         throw new Error("Method not implemented.");
     }
 

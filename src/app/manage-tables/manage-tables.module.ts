@@ -7,6 +7,7 @@ import { ManageTablesComponent } from './manage-tables.component';
 import { NewTableComponent } from './new-table/new-table.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [
   { path: '', component: ManageTablesComponent}
@@ -20,6 +21,7 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatInputModule,
+    MatSnackBarModule,
     RouterModule.forChild(routes)
   ]
 })
